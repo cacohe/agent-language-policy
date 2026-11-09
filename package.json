@@ -1,0 +1,27 @@
+{
+  "name": "agent-language-policy",
+  "version": "0.1.0",
+  "description": "Keep human decision content in a chosen language while preserving technical literals.",
+  "type": "module",
+  "private": true,
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "test": "node --test",
+    "verify": "node scripts/verify.mjs"
+  },
+  "bin": {
+    "agent-language-policy": "./bin/agent-language-policy.mjs"
+  },
+  "files": [
+    "bin/",
+    "src/",
+    "skills/",
+    "policy/",
+    "plugin.json",
+    "README.md",
+    "LICENSE"
+  ]
+}
+
