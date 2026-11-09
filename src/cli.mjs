@@ -2,6 +2,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 
 import { getInstructionTarget, SUPPORTED_AGENTS } from './adapters.mjs';
+import { resolveConfiguration } from './config.mjs';
 import { inspectManagedBlock } from './managed-block.mjs';
 import { applyInstallation, applyRemoval, planInstallation, planRemoval } from './installer.mjs';
 import { validateDocumentLanguage } from './language-validator.mjs';
@@ -43,6 +44,15 @@ function writeLine(stream, value) {
 
 function environmentFor(deps) {
   return { projectDir: deps.cwd, homeDir: deps.homeDir };
+}
+
+async function localeFor(options, deps) {
+  const resolved = await resolveConfiguration({
+    cliLocale: options.language,
+    projectConfigPath: join(deps.cwd, '.agent-language-policy.yaml'),
+    userConfigPath: join(deps.configDir, 'config.yaml'),
+  });
+  return resolved.locale;
 }
 
 function requireOption(options, name) {
@@ -102,10 +112,11 @@ export async function runCli(argv, dependencies = {}) {
 
   try {
     if (command === 'install') {
+      const locale = await localeFor(options, deps);
       const plan = await planInstallation({
         agent: requireOption(options, 'agent'),
         scope: requireOption(options, 'scope'),
-        locale: requireOption(options, 'language'),
+        locale,
         ...environmentFor(deps),
       });
       if (!options['dry-run']) await applyInstallation(plan);
@@ -136,7 +147,7 @@ export async function runCli(argv, dependencies = {}) {
     if (command === 'validate') {
       if (!positionals[1]) throw new Error('Missing Markdown file path');
       const path = resolve(deps.cwd, positionals[1]);
-      const locale = requireOption(options, 'language');
+      const locale = await localeFor(options, deps);
       const result = validateDocumentLanguage(await readFile(path, 'utf8'), locale);
       if (!result.valid) {
         writeLine(deps.stderr, `${path} does not match ${locale} (target ratio ${result.targetRatio.toFixed(2)})`);

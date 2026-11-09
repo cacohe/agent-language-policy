@@ -95,6 +95,6 @@
 
 **Interfaces:** 产出可重复执行的 `npm test` 和 `npm run verify`。
 
-- [ ] 编写临时目录安装、更新、切换语言和卸载集成测试并确认失败。
-- [ ] 补齐最小集成逻辑和打包检查。
-- [ ] 运行 `npm test`、`npm run verify` 和 CLI 冒烟测试。
+- [x] 编写临时目录安装、更新、切换语言和卸载集成测试并确认失败。
+- [x] 补齐最小集成逻辑和打包检查。
+- [x] 运行 `npm test`、`npm run verify` 和 CLI 冒烟测试。
