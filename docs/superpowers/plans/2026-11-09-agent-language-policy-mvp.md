@@ -65,9 +65,9 @@
 
 **Interfaces:** 产出 `getInstructionTargets(agent, scope, environment)`、`planInstallation(request)`、`applyInstallation(plan)`、`removeInstallation(plan)`。
 
-- [ ] 编写五个 Agent 路径、预览、备份、安装和卸载失败测试并确认失败。
-- [ ] 实现项目级和用户级适配器及文件操作服务。
-- [ ] 运行完整测试并确认通过。
+- [x] 编写五个 Agent 路径、预览、备份、安装和卸载失败测试并确认失败。
+- [x] 实现项目级和用户级适配器及文件操作服务。
+- [x] 运行完整测试并确认通过。
 
 ### Task 5: Markdown 语言校验器
 
