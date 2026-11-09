@@ -44,4 +44,3 @@ export function getInstructionTarget(agent, scope, { homeDir, projectDir }) {
 }
 
 export { SUPPORTED_AGENTS };
-

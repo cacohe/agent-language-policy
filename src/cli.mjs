@@ -83,6 +83,7 @@ async function statusFor(options, deps) {
 async function configure(options, deps) {
   const scope = requireOption(options, 'scope');
   const locale = requireOption(options, 'language');
+  if (!['project', 'user'].includes(scope)) throw new Error(`Unsupported scope: ${scope}`);
   if (!SUPPORTED_LOCALES.includes(locale)) throw new Error(`Unsupported target language: ${locale}`);
   const path = scope === 'project'
     ? join(deps.cwd, '.agent-language-policy.yaml')
@@ -135,8 +136,8 @@ export async function runCli(argv, dependencies = {}) {
       return 0;
     }
 
-    if (command === 'status') return statusFor(options, deps);
-    if (command === 'configure') return configure(options, deps);
+    if (command === 'status') return await statusFor(options, deps);
+    if (command === 'configure') return await configure(options, deps);
 
     if (command === 'doctor') {
       writeLine(deps.stdout, `Supported languages: ${SUPPORTED_LOCALES.join(', ')}`);
@@ -166,4 +167,3 @@ export async function runCli(argv, dependencies = {}) {
 }
 
 export { HELP };
-

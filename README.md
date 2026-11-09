@@ -55,4 +55,3 @@ node bin/agent-language-policy.mjs uninstall --agent codex --scope project
 npm test
 npm run verify
 ```
-

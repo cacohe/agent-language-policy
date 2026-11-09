@@ -9,4 +9,3 @@ await createPayment({ idempotencyKey });
 ```
 
 验证命令为 `npm test`，原始错误信息保持英文。
-

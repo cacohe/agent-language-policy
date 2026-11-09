@@ -42,4 +42,3 @@ export function extractHumanProse(markdown) {
 
   return prose.join('\n');
 }
-

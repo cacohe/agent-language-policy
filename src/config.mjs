@@ -41,4 +41,3 @@ export async function resolveConfiguration({
 
   return { locale: assertSupported(defaultLocale), source: 'default' };
 }
-

@@ -7,4 +7,3 @@
   "projectRule": "README、产品文档、UI 文案、代码注释、docstring、commit message、PR 内容、changelog 和公共 API 文档遵循当前用户要求、项目约定和目标受众，不因个人沟通语言而自动翻译。",
   "approvalRule": "在请求批准设计、架构、规格或实施计划之前，先确认其说明性正文使用简体中文；不符合时先重写。"
 }
-

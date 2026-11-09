@@ -10,4 +10,3 @@ export async function loadLanguageProfile(locale) {
   const url = new URL(`../policy/profiles/${locale}.json`, import.meta.url);
   return JSON.parse(await readFile(url, 'utf8'));
 }
-

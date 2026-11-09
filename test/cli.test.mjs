@@ -54,3 +54,17 @@ test('unknown commands return usage error code', async () => {
   assert.equal(code, 2);
   assert.match(stderr.value(), /Unknown command/);
 });
+
+test('configure rejects unknown scopes instead of writing user configuration', async () => {
+  const projectDir = await mkdtemp(join(tmpdir(), 'alp-cli-'));
+  const configDir = join(projectDir, 'config');
+  const stderr = capture();
+
+  const code = await runCli(['configure', '--scope', 'organization', '--language', 'zh-CN'], {
+    stdout: capture(), stderr, cwd: projectDir, homeDir: projectDir, configDir,
+  });
+
+  assert.equal(code, 2);
+  assert.match(stderr.value(), /Unsupported scope/);
+  await assert.rejects(readFile(join(configDir, 'config.yaml')), /ENOENT/);
+});

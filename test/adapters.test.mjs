@@ -29,4 +29,3 @@ test('rejects unknown agents and scopes', () => {
   assert.throws(() => getInstructionTarget('unknown', 'project', environment), /Unsupported agent/);
   assert.throws(() => getInstructionTarget('codex', 'organization', environment), /Unsupported scope/);
 });
-

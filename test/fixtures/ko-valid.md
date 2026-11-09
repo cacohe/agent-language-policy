@@ -9,4 +9,3 @@ await createPayment({ idempotencyKey });
 ```
 
 검증 명령은 `npm test`이며 원본 오류 메시지는 영어로 유지합니다.
-

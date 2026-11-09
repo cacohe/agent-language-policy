@@ -6,6 +6,8 @@ import { inspectManagedBlock, removeManagedBlock, upsertManagedBlock } from './m
 import { renderManagedPolicy } from './policy-renderer.mjs';
 import { loadLanguageProfile } from './profiles.mjs';
 
+const CURSOR_HEADER = ['---', 'description: Keep human decision content in the configured language', 'alwaysApply: true', '---', ''].join('\n');
+
 async function readOrEmpty(path) {
   try {
     return await readFile(path, 'utf8');
@@ -27,7 +29,7 @@ async function exists(path) {
 
 function withCursorHeader(content, format) {
   if (format !== 'mdc' || content) return content;
-  return ['---', 'description: Keep human decision content in the configured language', 'alwaysApply: true', '---', ''].join('\n');
+  return CURSOR_HEADER;
 }
 
 export async function planInstallation({ agent, scope, locale, projectDir, homeDir }) {
@@ -81,7 +83,8 @@ export async function planRemoval({ agent, scope, projectDir, homeDir }) {
 
   const originalContent = await readOrEmpty(target.path);
   const inspection = inspectManagedBlock(originalContent);
-  const nextContent = inspection.status === 'absent' ? originalContent : removeManagedBlock(originalContent);
+  let nextContent = inspection.status === 'absent' ? originalContent : removeManagedBlock(originalContent);
+  if (target.format === 'mdc' && nextContent === CURSOR_HEADER) nextContent = '';
   return {
     mode: 'file',
     operation: 'remove',

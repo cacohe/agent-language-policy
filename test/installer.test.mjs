@@ -48,3 +48,13 @@ test('manual targets return instructions without touching disk', async () => {
   await applyInstallation(plan);
   await assert.rejects(access(join(homeDir, '.cursor')), /ENOENT/);
 });
+
+test('uninstalling a newly created Cursor project rule removes generated frontmatter too', async () => {
+  const projectDir = await mkdtemp(join(tmpdir(), 'alp-install-'));
+  const request = { agent: 'cursor', scope: 'project', locale: 'zh-CN', projectDir, homeDir: projectDir };
+
+  await applyInstallation(await planInstallation(request));
+  await applyRemoval(await planRemoval(request));
+
+  assert.equal(await readFile(join(projectDir, '.cursor/rules/agent-language-policy.mdc'), 'utf8'), '');
+});

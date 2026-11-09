@@ -40,4 +40,3 @@ test('configuration rejects unsupported locales', async () => {
     /Unsupported target language: fr-FR/,
   );
 });
-

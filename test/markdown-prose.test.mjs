@@ -23,4 +23,3 @@ test('extracts explanatory prose while excluding code, inline literals, URLs, an
   assert.doesNotMatch(prose, /englishOnly/);
   assert.doesNotMatch(prose, /agent-language-policy/);
 });
-

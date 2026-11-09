@@ -11,4 +11,3 @@ Preserve source code, identifiers, APIs, type names, function names, variable na
 ## Project-owned content
 
 README files, product documentation, UI copy, comments, docstrings, commit messages, pull-request content, changelogs, and public API documentation follow the current user request, repository conventions, intended audience, and existing file language.
-

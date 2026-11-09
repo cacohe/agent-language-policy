@@ -7,4 +7,3 @@
   "projectRule": "README, 제품 문서, UI 문구, 코드 주석, docstring, commit message, PR 내용, changelog 및 공개 API 문서는 개인 대화 언어가 아니라 현재 사용자 요청, 프로젝트 규칙 및 대상 독자를 따릅니다.",
   "approvalRule": "설계, 아키텍처, 명세 또는 구현 계획의 승인을 요청하기 전에 설명 문장이 한국어인지 확인하고, 그렇지 않으면 먼저 다시 작성합니다."
 }
-
