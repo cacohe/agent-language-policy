@@ -2,5 +2,17 @@
   "$schema": "https://agent-plugins.org/schemas/1.0.0/plugin.schema.json",
   "name": "agent-language-policy",
   "version": "0.1.0",
-  "description": "Apply a selected human decision language across software-development agents while preserving technical literals."
+  "description": "Keep human decision content in a chosen language while preserving technical literals.",
+  "author": {
+    "name": "cacohe",
+    "url": "https://github.com/cacohe"
+  },
+  "homepage": "https://github.com/cacohe/agent-language-policy",
+  "repository": "https://github.com/cacohe/agent-language-policy",
+  "license": "Apache-2.0",
+  "keywords": [
+    "agent-skills",
+    "coding-agents",
+    "language-policy"
+  ]
 }

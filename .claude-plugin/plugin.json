@@ -1,0 +1,10 @@
+{
+  "name": "agent-language-policy",
+  "version": "0.1.0",
+  "description": "Keep human decision content in a chosen language while preserving technical literals.",
+  "author": {
+    "name": "cacohe"
+  },
+  "repository": "https://github.com/cacohe/agent-language-policy",
+  "license": "Apache-2.0"
+}

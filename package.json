@@ -3,7 +3,26 @@
   "version": "0.1.0",
   "description": "Keep human decision content in a chosen language while preserving technical literals.",
   "type": "module",
-  "private": true,
+  "license": "Apache-2.0",
+  "author": "cacohe and contributors",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cacohe/agent-language-policy.git"
+  },
+  "homepage": "https://github.com/cacohe/agent-language-policy#readme",
+  "bugs": {
+    "url": "https://github.com/cacohe/agent-language-policy/issues"
+  },
+  "keywords": [
+    "agent-skills",
+    "coding-agents",
+    "internationalization",
+    "language-policy",
+    "developer-tools"
+  ],
+  "publishConfig": {
+    "access": "public"
+  },
   "engines": {
     "node": ">=20"
   },
@@ -20,9 +39,13 @@
     "skills/",
     "policy/",
     "plugin.json",
+    ".codex-plugin/",
+    ".claude-plugin/",
+    "gemini-extension.json",
     "README.md",
     "README.zh-CN.md",
     "README.ko-KR.md",
-    "LICENSE"
+    "LICENSE",
+    "NOTICE"
   ]
 }

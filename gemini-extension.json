@@ -1,0 +1,5 @@
+{
+  "name": "agent-language-policy",
+  "version": "0.1.0",
+  "description": "Keep human decision content in a chosen language while preserving technical literals."
+}
