@@ -55,9 +55,9 @@
 
 **Interfaces:** 产出 `upsertManagedBlock(text, block)`、`removeManagedBlock(text)`、`inspectManagedBlock(text)`。
 
-- [ ] 编写新增、更新、重复安装、损坏区块和卸载失败测试并确认失败。
-- [ ] 实现严格且幂等的托管区块编辑器。
-- [ ] 运行完整测试并确认通过。
+- [x] 编写新增、更新、重复安装、损坏区块和卸载失败测试并确认失败。
+- [x] 实现严格且幂等的托管区块编辑器。
+- [x] 运行完整测试并确认通过。
 
 ### Task 4: Agent 适配器和安装服务
 
