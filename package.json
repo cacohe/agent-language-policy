@@ -21,6 +21,8 @@
     "policy/",
     "plugin.json",
     "README.md",
+    "README.zh-CN.md",
+    "README.ko-KR.md",
     "LICENSE"
   ]
 }

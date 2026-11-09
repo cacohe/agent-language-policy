@@ -34,3 +34,16 @@ test('portable skill has valid minimum Agent Skills frontmatter', async () => {
   assert.match(frontmatter[1], /^name: human-decision-language$/m);
   assert.match(frontmatter[1], /^description: .+/m);
 });
+
+test('package ships English default README with Chinese and Korean alternatives', async () => {
+  const packageJson = await readJson(new URL('../package.json', import.meta.url));
+  const english = await readFile(new URL('../README.md', import.meta.url), 'utf8');
+  const chinese = await readFile(new URL('../README.zh-CN.md', import.meta.url), 'utf8');
+  const korean = await readFile(new URL('../README.ko-KR.md', import.meta.url), 'utf8');
+
+  assert.match(english, /English \| \[简体中文\]/);
+  assert.match(chinese, /\[English\].*简体中文/);
+  assert.match(korean, /\[English\].*한국어/);
+  assert.ok(packageJson.files.includes('README.zh-CN.md'));
+  assert.ok(packageJson.files.includes('README.ko-KR.md'));
+});
