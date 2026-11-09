@@ -110,15 +110,53 @@ test('portable skill is self-contained and synchronized with language profiles',
   }
 });
 
-test('package ships English default README with Chinese and Korean alternatives', async () => {
+test('package ships synchronized public installation documentation', async () => {
   const packageJson = await readJson(new URL('../package.json', import.meta.url));
-  const english = await readFile(new URL('../README.md', import.meta.url), 'utf8');
-  const chinese = await readFile(new URL('../README.zh-CN.md', import.meta.url), 'utf8');
-  const korean = await readFile(new URL('../README.ko-KR.md', import.meta.url), 'utf8');
+  const readmes = await Promise.all([
+    'README.md',
+    'README.zh-CN.md',
+    'README.zh-TW.md',
+    'README.ko-KR.md',
+  ].map(async (path) => [path, await readFile(new URL(`../${path}`, import.meta.url), 'utf8')]));
 
-  assert.match(english, /English \| \[简体中文\]/);
-  assert.match(chinese, /\[English\].*简体中文/);
-  assert.match(korean, /\[English\].*한국어/);
-  assert.ok(packageJson.files.includes('README.zh-CN.md'));
-  assert.ok(packageJson.files.includes('README.ko-KR.md'));
+  for (const [path, readme] of readmes) {
+    for (const label of ['English', '简体中文', '繁體中文', '한국어']) {
+      assert.match(readme, new RegExp(label), `${path} must link all README languages`);
+    }
+    for (const locale of ['zh-CN', 'zh-TW', 'ko-KR']) {
+      assert.match(readme, new RegExp(locale), `${path} must list ${locale}`);
+    }
+    for (const agent of ['Codex', 'Claude Code', 'Cursor', 'Gemini CLI', 'GitHub Copilot']) {
+      assert.match(readme, new RegExp(agent), `${path} must document ${agent}`);
+    }
+    for (const command of ['install', 'status', 'validate', 'uninstall']) {
+      assert.match(readme, new RegExp(`agent-language-policy\\.mjs ${command}`), `${path} must document ${command}`);
+    }
+    assert.match(readme, /npm[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
+    assert.match(readme, /(marketplace|市场|市集|마켓플레이스)[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
+  }
+
+  for (const path of ['README.zh-CN.md', 'README.zh-TW.md', 'README.ko-KR.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md']) {
+    assert.ok(packageJson.files.includes(path), `package must include ${path}`);
+  }
+
+  const security = await readFile(new URL('../SECURITY.md', import.meta.url), 'utf8');
+  assert.match(security, /Private Vulnerability Reporting/);
+  assert.doesNotMatch(security, /@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
+});
+
+test('current public documents avoid provisional product positioning', async () => {
+  const paths = [
+    'README.md',
+    'README.zh-CN.md',
+    'README.zh-TW.md',
+    'README.ko-KR.md',
+    'docs/superpowers/specs/2026-11-09-agent-language-policy-design.md',
+    'docs/superpowers/plans/2026-11-09-agent-language-policy-initial-release.md',
+  ];
+
+  for (const path of paths) {
+    const content = await readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+    assert.doesNotMatch(content, /\bMVP\b/i, `${path} must not position the project as an MVP`);
+  }
 });

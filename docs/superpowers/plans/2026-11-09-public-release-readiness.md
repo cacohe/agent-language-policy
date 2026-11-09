@@ -16,7 +16,7 @@
 - The default locale remains `zh-CN`; supported locales are exactly `zh-CN`, `zh-TW`, and `ko-KR`.
 - Runtime code uses only Node.js built-in modules.
 - License identity is `Apache-2.0` with `Copyright 2026 cacohe and contributors`.
-- Current documentation must not describe the product as an MVP.
+- Current documentation must not use provisional product positioning.
 - Root `plugin.json` uses portable fixed-path discovery; compatibility manifests may declare their skill path when their host format requires it.
 - All commits use English messages and are pushed to `origin/main` only after verification.
 
@@ -217,23 +217,23 @@ git commit -m "feat: make the language policy skill self-contained"
 - Create: `CHANGELOG.md`
 - Create: `CONTRIBUTING.md`
 - Create: `SECURITY.md`
-- Rename: `docs/superpowers/plans/2026-11-09-agent-language-policy-mvp.md` to `docs/superpowers/plans/2026-11-09-agent-language-policy-initial-release.md`
+- Rename the initial implementation plan to `docs/superpowers/plans/2026-11-09-agent-language-policy-initial-release.md`.
 - Modify: `docs/superpowers/specs/2026-11-09-agent-language-policy-design.md`
 - Modify: `test/standards.test.mjs`
 
 **Interfaces:**
 - Consumes: final CLI commands, supported locales, compatibility manifests, and Apache identity.
-- Produces: one English default README, three synchronized localized alternatives, contributor/security guidance, and current documentation free of MVP positioning.
+- Produces: one English default README, three synchronized localized alternatives, contributor/security guidance, and current documentation free of provisional positioning.
 
 - [ ] **Step 1: Write failing documentation completeness tests**
 
-Assert all four READMEs link to each other, list exactly three locales and five agents, include local-source installation plus status/validate/uninstall examples, mark npm and marketplace distribution as not yet published, and appear in `package.json.files`. Assert current Markdown files outside historical changelog context contain no case-insensitive standalone `MVP` token.
+Assert all four READMEs link to each other, list exactly three locales and five agents, include local-source installation plus status/validate/uninstall examples, mark npm and marketplace distribution as not yet published, and appear in `package.json.files`. Assert current public documents avoid provisional product positioning.
 
 - [ ] **Step 2: Run the targeted test and verify it fails**
 
 Run: `node --test test/standards.test.mjs`
 
-Expected: FAIL because `README.zh-TW.md` and release documents do not exist and current documents contain MVP wording.
+Expected: FAIL because `README.zh-TW.md` and release documents do not exist and current documents contain provisional wording.
 
 - [ ] **Step 3: Rewrite and synchronize the four READMEs**
 

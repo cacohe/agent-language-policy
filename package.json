@@ -44,7 +44,11 @@
     "gemini-extension.json",
     "README.md",
     "README.zh-CN.md",
+    "README.zh-TW.md",
     "README.ko-KR.md",
+    "CHANGELOG.md",
+    "CONTRIBUTING.md",
+    "SECURITY.md",
     "LICENSE",
     "NOTICE"
   ]

@@ -1,8 +1,8 @@
-# Agent Language Policy MVP Implementation Plan
+# Agent Language Policy Initial Release Implementation Plan
 
 > **For agentic workers:** REQUIRED SUB-SKILL: Use superpowers:subagent-driven-development (recommended) or superpowers:executing-plans to implement this plan task-by-task. Steps use checkbox (`- [ ]`) syntax for tracking.
 
-**Goal:** 创建一个支持简体中文和韩文的跨编码 Agent 语言策略 MVP，包含标准 Skill、常驻指令安装器和 Markdown 文档校验器。
+**Goal:** 创建一个支持简体中文和韩文的跨编码 Agent 语言策略首个发行版本，包含标准 Skill、常驻指令安装器和 Markdown 文档校验器。
 
 **Architecture:** 以统一配置和语言配置文件为事实来源，核心 Skill 提供可移植语义，Node.js CLI 将生成的托管规则写入各 Agent 原生指令文件。校验器只分析 Markdown 的人类说明正文，并排除代码与技术字面量。
 
