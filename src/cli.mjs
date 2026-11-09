@@ -114,14 +114,21 @@ export async function runCli(argv, dependencies = {}) {
   try {
     if (command === 'install') {
       const locale = await localeFor(options, deps);
+      const agent = requireOption(options, 'agent');
+      const scope = requireOption(options, 'scope');
       const plan = await planInstallation({
-        agent: requireOption(options, 'agent'),
-        scope: requireOption(options, 'scope'),
+        agent,
+        scope,
         locale,
         ...environmentFor(deps),
       });
       if (!options['dry-run']) await applyInstallation(plan);
       writeLine(deps.stdout, plan.mode === 'manual' ? plan.instructions : `${options['dry-run'] ? 'Would update' : 'Updated'}: ${plan.targetPath}`);
+      writeLine(deps.stdout, `Persistent instruction: ${plan.mode === 'manual' ? 'manual setup required' : options['dry-run'] ? 'preview only' : 'installed'}`);
+      writeLine(deps.stdout, 'Portable Skill: separate installation required from skills/human-decision-language/; this command does not install or discover it.');
+      writeLine(deps.stdout, `Next: agent-language-policy status --agent ${agent} --scope ${scope}`);
+      writeLine(deps.stdout, `Validate: agent-language-policy validate <file> --language ${locale}`);
+      writeLine(deps.stdout, `Remove: agent-language-policy uninstall --agent ${agent} --scope ${scope}`);
       return 0;
     }
 

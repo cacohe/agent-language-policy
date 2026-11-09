@@ -47,6 +47,22 @@ test('dry-run previews installation without writing the instruction file', async
   await assert.rejects(readFile(join(projectDir, 'AGENTS.md')), /ENOENT/);
 });
 
+test('installation output explains coverage and next lifecycle commands', async () => {
+  const projectDir = await mkdtemp(join(tmpdir(), 'alp-cli-'));
+  const stdout = capture();
+  const code = await runCli([
+    'install', '--agent', 'codex', '--scope', 'project', '--language', 'zh-TW',
+  ], { stdout, stderr: capture(), cwd: projectDir, homeDir: projectDir });
+
+  assert.equal(code, 0);
+  assert.match(stdout.value(), /AGENTS\.md/);
+  assert.match(stdout.value(), /Persistent instruction: installed/);
+  assert.match(stdout.value(), /Portable Skill: separate installation/);
+  assert.match(stdout.value(), /status --agent codex --scope project/);
+  assert.match(stdout.value(), /validate <file> --language zh-TW/);
+  assert.match(stdout.value(), /uninstall --agent codex --scope project/);
+});
+
 test('validate returns a nonzero code for an English-only Chinese decision document', async () => {
   const projectDir = await mkdtemp(join(tmpdir(), 'alp-cli-'));
   const documentPath = join(projectDir, 'plan.md');
