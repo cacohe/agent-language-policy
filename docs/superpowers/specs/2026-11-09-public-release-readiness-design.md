@@ -68,7 +68,7 @@ Skill 目录内包含三个语言参考文件，避免独立安装后引用 Skil
 
 ### 插件清单
 
-根 `plugin.json` 声明 `skills: "./skills/"`。为需要原生扩展清单的 Agent 提供最小适配清单；不支持开放 Agent Skills 的环境继续由 CLI 写入原生规则文件。
+根 `plugin.json` 使用可移植 Agent Plugins 格式；该格式按固定的根 `skills/` 目录发现 Skill，不声明多余的 `skills` 字段。另提供 `.codex-plugin/plugin.json`、`.claude-plugin/plugin.json` 和 `gemini-extension.json` 最小兼容清单；不支持开放 Agent Skills 的环境继续由 CLI 写入原生规则文件。
 
 ### CLI 安装语义
 
