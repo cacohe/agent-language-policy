@@ -151,9 +151,10 @@ export async function runCli(argv, dependencies = {}) {
       const locale = await localeFor(options, deps);
       const result = validateDocumentLanguage(await readFile(path, 'utf8'), locale);
       if (!result.valid) {
-        writeLine(deps.stderr, `${path} does not match ${locale} (target ratio ${result.targetRatio.toFixed(2)})`);
+        writeLine(deps.stderr, `${path} does not match ${locale}: ${result.failureReason} (target ratio ${result.targetRatio.toFixed(2)})`);
         return 1;
       }
+      for (const warning of result.warnings) writeLine(deps.stderr, `${path}: warning ${warning}`);
       writeLine(deps.stdout, `${path} matches ${locale}`);
       return 0;
     }

@@ -82,3 +82,31 @@ test('configure rejects unknown scopes instead of writing user configuration', a
   assert.match(stderr.value(), /Unsupported scope/);
   await assert.rejects(readFile(join(configDir, 'config.yaml')), /ENOENT/);
 });
+
+test('validate warns without failing for limited simplified evidence in Traditional Chinese', async () => {
+  const projectDir = await mkdtemp(join(tmpdir(), 'alp-cli-'));
+  const documentPath = join(projectDir, 'plan.md');
+  await writeFile(documentPath, '# 實作計畫\n\n这份實作計畫說明系統架構、資料流程與風險。\n');
+  const stderr = capture();
+
+  const code = await runCli(['validate', documentPath, '--language', 'zh-TW'], {
+    stdout: capture(), stderr, cwd: projectDir, homeDir: projectDir,
+  });
+
+  assert.equal(code, 0);
+  assert.match(stderr.value(), /possible-simplified-chinese/);
+});
+
+test('validate reports a variant mismatch for simplified-dominant Traditional Chinese', async () => {
+  const projectDir = await mkdtemp(join(tmpdir(), 'alp-cli-'));
+  const documentPath = join(projectDir, 'plan.md');
+  await writeFile(documentPath, '# 实施计划\n\n这个实现计划说明系统架构、数据流程、风险以及后续维护方式。\n');
+  const stderr = capture();
+
+  const code = await runCli(['validate', documentPath, '--language', 'zh-TW'], {
+    stdout: capture(), stderr, cwd: projectDir, homeDir: projectDir,
+  });
+
+  assert.equal(code, 1);
+  assert.match(stderr.value(), /variant-mismatch/);
+});

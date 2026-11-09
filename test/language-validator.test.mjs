@@ -30,3 +30,41 @@ test('rejects English-only decision prose for Chinese and Korean policies', asyn
 test('rejects unsupported validator locales', () => {
   assert.throws(() => validateDocumentLanguage('Bonjour', 'fr-FR'), /Unsupported target language/);
 });
+
+test('accepts Traditional Chinese prose without variant warnings', async () => {
+  const result = validateDocumentLanguage(await fixture('zh-TW-valid.md'), 'zh-TW');
+
+  assert.equal(result.valid, true);
+  assert.equal(result.failureReason, null);
+  assert.deepEqual(result.warnings, []);
+  assert.equal(result.variantEvidence.simplifiedCharacters, 0);
+  assert.ok(result.variantEvidence.traditionalCharacters >= 4);
+});
+
+test('rejects simplified-dominant prose for Traditional Chinese', async () => {
+  const result = validateDocumentLanguage(await fixture('zh-TW-simplified.md'), 'zh-TW');
+
+  assert.equal(result.valid, false);
+  assert.equal(result.failureReason, 'variant-mismatch');
+  assert.ok(result.variantEvidence.simplifiedCharacters >= 4);
+});
+
+test('warns but accepts a small amount of simplified variant evidence', async () => {
+  const result = validateDocumentLanguage(await fixture('zh-TW-warning.md'), 'zh-TW');
+
+  assert.equal(result.valid, true);
+  assert.equal(result.failureReason, null);
+  assert.deepEqual(result.warnings, ['possible-simplified-chinese']);
+});
+
+test('accepts shared Han prose without guessing a Chinese variant', () => {
+  const result = validateDocumentLanguage('# 安全方案\n\n安全方案工作流程', 'zh-TW');
+
+  assert.equal(result.valid, true);
+  assert.equal(result.failureReason, null);
+  assert.deepEqual(result.warnings, []);
+  assert.deepEqual(result.variantEvidence, {
+    simplifiedCharacters: 0,
+    traditionalCharacters: 0,
+  });
+});
