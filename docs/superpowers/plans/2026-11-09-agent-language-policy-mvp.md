@@ -75,9 +75,9 @@
 
 **Interfaces:** 产出 `extractHumanProse(markdown)`、`validateDocumentLanguage(markdown, locale)`。
 
-- [ ] 编写代码块排除、中韩正文通过和英文正文失败测试并确认失败。
-- [ ] 实现 Markdown 说明文本提取和语言特征校验。
-- [ ] 运行完整测试并确认通过。
+- [x] 编写代码块排除、中韩正文通过和英文正文失败测试并确认失败。
+- [x] 实现 Markdown 说明文本提取和语言特征校验。
+- [x] 运行完整测试并确认通过。
 
 ### Task 6: CLI、诊断与用户文档
 
