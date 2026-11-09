@@ -28,7 +28,10 @@
   },
   "scripts": {
     "test": "node --test",
-    "verify": "node scripts/verify.mjs"
+    "verify": "node scripts/verify.mjs",
+    "verify:package": "node scripts/verify-package.mjs",
+    "verify:release": "npm run verify && npm run verify:package",
+    "prepack": "npm run verify -- --skip-tests"
   },
   "bin": {
     "agent-language-policy": "./bin/agent-language-policy.mjs"
