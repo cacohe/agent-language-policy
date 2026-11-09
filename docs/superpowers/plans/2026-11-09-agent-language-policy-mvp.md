@@ -85,9 +85,9 @@
 
 **Interfaces:** 产出 `install`、`configure`、`status`、`doctor`、`validate`、`uninstall` 命令。
 
-- [ ] 编写 CLI 帮助、预览和错误码失败测试并确认失败。
-- [ ] 实现最小 CLI 和中文使用说明。
-- [ ] 运行完整测试并确认通过。
+- [x] 编写 CLI 帮助、预览和错误码失败测试并确认失败。
+- [x] 实现最小 CLI 和中文使用说明。
+- [x] 运行完整测试并确认通过。
 
 ### Task 7: 完整验证和打包检查
 
