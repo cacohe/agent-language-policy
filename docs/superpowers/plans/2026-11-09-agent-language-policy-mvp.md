@@ -45,9 +45,9 @@
 
 **Interfaces:** 产出 `resolveConfiguration(options)`、`loadLanguageProfile(locale)`、`renderManagedPolicy(profile)`。
 
-- [ ] 编写配置优先级和中韩规则渲染失败测试并确认失败。
-- [ ] 实现最小配置解析和策略渲染。
-- [ ] 运行测试并确认通过。
+- [x] 编写配置优先级和中韩规则渲染失败测试并确认失败。
+- [x] 实现最小配置解析和策略渲染。
+- [x] 运行测试并确认通过。
 
 ### Task 3: 幂等托管区块编辑器
 
