@@ -23,12 +23,13 @@ npm 套件尚未發佈，市集（marketplace）版本也尚未發佈。正式�
 ## 從原始碼安裝
 
 ```bash
-git clone https://github.com/cacohe/agent-language-policy.git
-cd agent-language-policy
+git clone https://github.com/cacohe/agent-language-policy.git /path/to/agent-language-policy
+cd /path/to/agent-language-policy
 npm test
-node bin/agent-language-policy.mjs doctor
-node bin/agent-language-policy.mjs install --agent codex --scope project --language zh-TW --dry-run
-node bin/agent-language-policy.mjs install --agent codex --scope project --language zh-TW
+cd /path/to/your-project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs doctor
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agent codex --scope project --language zh-TW --dry-run
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agent codex --scope project --language zh-TW
 ```
 
 可將 `codex` 替換為 `claude-code`、`cursor`、`gemini-cli` 或 `github-copilot`，目標語言也可改成 `zh-CN` 或 `ko-KR`。Cursor 使用者規則需依 CLI 提示手動設定。
@@ -38,10 +39,10 @@ node bin/agent-language-policy.mjs install --agent codex --scope project --langu
 ## 狀態、驗證與解除安裝
 
 ```bash
-node bin/agent-language-policy.mjs status --agent codex --scope project
-node bin/agent-language-policy.mjs validate docs/plans/feature.md --language zh-TW
-node bin/agent-language-policy.mjs uninstall --agent codex --scope project --dry-run
-node bin/agent-language-policy.mjs uninstall --agent codex --scope project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs status --agent codex --scope project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs validate docs/plans/feature.md --language zh-TW
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project --dry-run
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project
 ```
 
 解除安裝只會刪除工具管理的區塊。安裝器修改既有檔案前會建立備份，Skill 也不會預先授權工具或 shell 權限。五種 Agent 的檔案對應均有自動化測試，但尚未經過公開市集上架驗證。

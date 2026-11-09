@@ -68,3 +68,31 @@ test('accepts shared Han prose without guessing a Chinese variant', () => {
     traditionalCharacters: 0,
   });
 });
+
+test('does not treat shared 查 量 or 料 characters as variant evidence', () => {
+  for (const markdown of [
+    '各向量的量相同，分量的量亦相同。',
+    '安全查核工作',
+    '材料管理流程',
+  ]) {
+    const result = validateDocumentLanguage(markdown, 'zh-TW');
+
+    assert.equal(result.valid, true, markdown);
+    assert.deepEqual(result.warnings, [], markdown);
+    assert.deepEqual(result.variantEvidence, {
+      simplifiedCharacters: 0,
+      traditionalCharacters: 0,
+    }, markdown);
+  }
+});
+
+test('shared characters do not suppress a real simplified variant mismatch', () => {
+  const result = validateDocumentLanguage('这个开发材料材料', 'zh-TW');
+
+  assert.equal(result.valid, false);
+  assert.equal(result.failureReason, 'variant-mismatch');
+  assert.deepEqual(result.variantEvidence, {
+    simplifiedCharacters: 4,
+    traditionalCharacters: 0,
+  });
+});

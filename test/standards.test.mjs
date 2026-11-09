@@ -132,6 +132,8 @@ test('package ships synchronized public installation documentation', async () =>
     for (const command of ['install', 'status', 'validate', 'uninstall']) {
       assert.match(readme, new RegExp(`agent-language-policy\\.mjs ${command}`), `${path} must document ${command}`);
     }
+    assert.match(readme, /cd \/path\/to\/your-project/, `${path} must change to the target project`);
+    assert.match(readme, /node \/path\/to\/agent-language-policy\/bin\/agent-language-policy\.mjs install/, `${path} must invoke the checkout from the target project`);
     assert.match(readme, /npm[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
     assert.match(readme, /(marketplace|市场|市集|마켓플레이스)[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
   }

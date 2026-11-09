@@ -6,8 +6,8 @@ const TARGET_PATTERNS = Object.freeze({
   'ko-KR': /\p{Script=Hangul}/gu,
 });
 
-const SIMPLIFIED_VARIANT_PATTERN = /[这为发后里国个实计说统构数据风险续维护开员审查软码识别类变量项档径参库赖设环协议栈踪误应过则]/gu;
-const TRADITIONAL_VARIANT_PATTERN = /[這為發後裡國個實計說統構資料風險續維護開員審查軟碼識別類變數項檔徑參庫賴設環協議疊蹤誤應過則]/gu;
+const SIMPLIFIED_VARIANT_PATTERN = /[这为发后里国个实计说统构数据风险续维护开员审软码识别类变项档径参库赖设环协议栈踪误应过则]/gu;
+const TRADITIONAL_VARIANT_PATTERN = /[這為發後裡國個實計說統構資風險續維護開員審軟碼識別類變數項檔徑參庫賴設環協議疊蹤誤應過則]/gu;
 
 export function validateDocumentLanguage(markdown, locale) {
   const targetPattern = TARGET_PATTERNS[locale];

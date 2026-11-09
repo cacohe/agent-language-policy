@@ -23,12 +23,13 @@ npm 패키지는 아직 게시되지 않았습니다. 마켓플레이스 패키�
 ## 소스에서 설치
 
 ```bash
-git clone https://github.com/cacohe/agent-language-policy.git
-cd agent-language-policy
+git clone https://github.com/cacohe/agent-language-policy.git /path/to/agent-language-policy
+cd /path/to/agent-language-policy
 npm test
-node bin/agent-language-policy.mjs doctor
-node bin/agent-language-policy.mjs install --agent codex --scope project --language ko-KR --dry-run
-node bin/agent-language-policy.mjs install --agent codex --scope project --language ko-KR
+cd /path/to/your-project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs doctor
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agent codex --scope project --language ko-KR --dry-run
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agent codex --scope project --language ko-KR
 ```
 
 `codex` 대신 `claude-code`, `cursor`, `gemini-cli`, `github-copilot`을 사용할 수 있고 언어는 `zh-CN` 또는 `zh-TW`로 바꿀 수 있습니다. Cursor 사용자 규칙은 CLI가 안내하는 수동 설정이 필요합니다.
@@ -38,10 +39,10 @@ node bin/agent-language-policy.mjs install --agent codex --scope project --langu
 ## 상태, 검증 및 제거
 
 ```bash
-node bin/agent-language-policy.mjs status --agent codex --scope project
-node bin/agent-language-policy.mjs validate docs/plans/feature.md --language ko-KR
-node bin/agent-language-policy.mjs uninstall --agent codex --scope project --dry-run
-node bin/agent-language-policy.mjs uninstall --agent codex --scope project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs status --agent codex --scope project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs validate docs/plans/feature.md --language ko-KR
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project --dry-run
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project
 ```
 
 제거 시 도구가 관리하는 블록만 삭제합니다. 설치 프로그램은 기존 파일 변경 전에 백업을 만들고 Skill은 도구나 shell 권한을 사전 승인하지 않습니다. 다섯 에이전트의 파일 매핑은 자동화 테스트로 검증하지만 공개 마켓플레이스 등록은 아직 검증하지 않았습니다.

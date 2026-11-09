@@ -31,5 +31,6 @@ test('CI verifies the release matrix without publishing', async () => {
   for (const os of ['ubuntu-latest', 'windows-latest', 'macos-latest']) assert.match(workflow, new RegExp(os));
   assert.match(workflow, /node-version:\s*\[20, 22\]/);
   assert.match(workflow, /npm run verify:release/);
+  assert.doesNotMatch(workflow, /cache:\s*npm/, 'setup-node npm caching requires a committed lockfile');
   assert.doesNotMatch(workflow, /npm publish|contents:\s*write|id-token:\s*write/);
 });

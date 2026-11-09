@@ -25,17 +25,18 @@ The npm package is not yet published. The marketplace package is not yet publish
 Clone this repository, verify it, then run the CLI directly:
 
 ```bash
-git clone https://github.com/cacohe/agent-language-policy.git
-cd agent-language-policy
+git clone https://github.com/cacohe/agent-language-policy.git /path/to/agent-language-policy
+cd /path/to/agent-language-policy
 npm test
-node bin/agent-language-policy.mjs doctor
+cd /path/to/your-project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs doctor
 ```
 
 Preview and install a persistent project rule:
 
 ```bash
-node bin/agent-language-policy.mjs install --agent codex --scope project --language zh-CN --dry-run
-node bin/agent-language-policy.mjs install --agent codex --scope project --language zh-CN
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agent codex --scope project --language zh-CN --dry-run
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agent codex --scope project --language zh-CN
 ```
 
 Replace `codex` with `claude-code`, `cursor`, `gemini-cli`, or `github-copilot`. Replace `zh-CN` with `zh-TW` or `ko-KR` as needed. Cursor user-level rules require the manual step printed by the CLI.
@@ -45,10 +46,10 @@ The portable Skill is in `skills/human-decision-language/`. Copy that directory 
 ## Operate and remove
 
 ```bash
-node bin/agent-language-policy.mjs status --agent codex --scope project
-node bin/agent-language-policy.mjs validate docs/plans/feature.md --language zh-CN
-node bin/agent-language-policy.mjs uninstall --agent codex --scope project --dry-run
-node bin/agent-language-policy.mjs uninstall --agent codex --scope project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs status --agent codex --scope project
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs validate docs/plans/feature.md --language zh-CN
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project --dry-run
+node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project
 ```
 
 Uninstalling removes only the managed block.
