@@ -13,6 +13,16 @@
 
 npm 패키지는 아직 게시되지 않았습니다. 마켓플레이스 패키지도 아직 게시되지 않았습니다. 공식 릴리스 전에는 신뢰할 수 있는 저장소 체크아웃에서 설치하세요.
 
+## portable Skill 설치
+
+저장소 접근 권한이 있으면 커뮤니티 `skills` CLI로 지원되는 Agent에 `human-decision-language`를 설치할 수 있습니다.
+
+```bash
+npx skills add cacohe/agent-language-policy --skill human-decision-language
+```
+
+이 명령은 portable Skill만 설치합니다. 영구 지침을 설치하거나 설정을 만들거나 Markdown 검증기를 제공하지 않습니다. 이러한 기능이 필요하면 정책 CLI를 별도로 설치하세요. 두 설치 경로의 차이는 [Architecture](docs/architecture.md)를 참조하세요.
+
 ## 정책 범위
 
 - 설계, 계획, 검토, 진행 상황, 위험 및 승인 요청과 같은 사람의 의사결정 내용은 설정 언어를 사용합니다.
@@ -47,7 +57,7 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --ag
 
 제거 시 도구가 관리하는 블록만 삭제합니다. 설치 프로그램은 기존 파일 변경 전에 백업을 만들고 Skill은 도구나 shell 권한을 사전 승인하지 않습니다. 다섯 에이전트의 파일 매핑은 자동화 테스트로 검증하지만 공개 마켓플레이스 등록은 아직 검증하지 않았습니다.
 
-프로젝트 정책과 기록은 [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), [CHANGELOG.md](CHANGELOG.md)를 참조하세요.
+설계, 프로젝트 정책 및 기록은 [Architecture](docs/architecture.md), [SECURITY.md](SECURITY.md), [CHANGELOG.md](CHANGELOG.md)를 참조하세요. 일반적인 문제는 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)에 제출하고 보안 취약점은 `SECURITY.md`의 비공개 절차로 보고하세요.
 
 ## 개발
 

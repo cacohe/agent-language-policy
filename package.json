@@ -50,8 +50,8 @@
     "README.zh-TW.md",
     "README.ko-KR.md",
     "CHANGELOG.md",
-    "CONTRIBUTING.md",
     "SECURITY.md",
+    "docs/architecture.md",
     "LICENSE",
     "NOTICE"
   ]

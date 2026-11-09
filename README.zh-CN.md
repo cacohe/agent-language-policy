@@ -13,6 +13,16 @@
 
 npm 包尚未发布，市场（marketplace）版本也尚未发布。正式发布前请从可信的仓库检出版本安装。
 
+## 安装 portable Skill
+
+拥有仓库访问权限时，可以使用社区 `skills` CLI 把 `human-decision-language` 安装到支持的 Agent：
+
+```bash
+npx skills add cacohe/agent-language-policy --skill human-decision-language
+```
+
+该命令只安装 portable Skill，不安装常驻指令，不创建配置，也不提供 Markdown 校验器。如需这些能力，请另行安装策略 CLI。两条安装路径的区别见[架构说明](docs/architecture.md)。
+
 ## 策略边界
 
 - 设计、计划、审查、进度、风险和审批请求等人类决策内容使用目标语言。
@@ -47,7 +57,7 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --ag
 
 卸载只删除工具管理的区块。安装器修改已有文件前会创建备份，且 Skill 不预授权工具或 shell 权限。五种 Agent 的文件映射均有自动化测试，但尚未通过公开市场上架验证。
 
-项目政策与历史见 [CONTRIBUTING.md](CONTRIBUTING.md)、[SECURITY.md](SECURITY.md) 和 [CHANGELOG.md](CHANGELOG.md)。
+设计、项目政策和历史见[架构说明](docs/architecture.md)、[SECURITY.md](SECURITY.md) 和 [CHANGELOG.md](CHANGELOG.md)。普通问题请提交到 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)，安全漏洞请按 `SECURITY.md` 中的私密流程报告。
 
 ## 开发
 

@@ -13,6 +13,16 @@ Keep the explanations that developers must review in a chosen language while pre
 
 The npm package is not yet published. The marketplace package is not yet published either. Install from a trusted checkout until a release is announced.
 
+## Install the portable Skill
+
+With repository access, the community `skills` CLI can install `human-decision-language` into a supported Agent:
+
+```bash
+npx skills add cacohe/agent-language-policy --skill human-decision-language
+```
+
+This command installs only the portable Skill. It does not install persistent instructions, create configuration, or provide the Markdown validator. Install the policy CLI separately when you need those capabilities. See [Architecture](docs/architecture.md) for how the two installation paths differ.
+
 ## Policy boundaries
 
 - Human decision content—such as designs, plans, reviews, progress updates, risks, and approval requests—uses the configured language.
@@ -58,7 +68,7 @@ Uninstalling removes only the managed block.
 
 Review the Skill and generated instruction block before installation. The installer creates a backup before changing an existing file and never grants tools or shell permissions. The file mappings for all five Agents are covered by automated tests; marketplace packaging has not yet been verified through a public listing.
 
-See [CONTRIBUTING.md](CONTRIBUTING.md), [SECURITY.md](SECURITY.md), and [CHANGELOG.md](CHANGELOG.md) for project policies and release history.
+See [Architecture](docs/architecture.md), [SECURITY.md](SECURITY.md), and [CHANGELOG.md](CHANGELOG.md) for design, project policies, and release history. Report ordinary problems through [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues); report vulnerabilities through the private process in `SECURITY.md`.
 
 ## Development
 

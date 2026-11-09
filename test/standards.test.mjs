@@ -129,12 +129,14 @@ test('portable skill is self-contained and synchronized with language profiles',
 
 test('package ships synchronized public installation documentation', async () => {
   const packageJson = await readJson(new URL('../package.json', import.meta.url));
-  const readmes = await Promise.all([
-    'README.md',
-    'README.zh-CN.md',
-    'README.zh-TW.md',
-    'README.ko-KR.md',
-  ].map(async (path) => [path, await readFile(new URL(`../${path}`, import.meta.url), 'utf8')]));
+  const readmeRequirements = {
+    'README.md': /installs only the portable Skill/i,
+    'README.zh-CN.md': /只安装.*portable Skill/,
+    'README.zh-TW.md': /只安裝.*portable Skill/,
+    'README.ko-KR.md': /portable Skill.*만 설치/,
+  };
+  const readmes = await Promise.all(Object.keys(readmeRequirements)
+    .map(async (path) => [path, await readFile(new URL(`../${path}`, import.meta.url), 'utf8')]));
 
   for (const [path, readme] of readmes) {
     for (const label of ['English', '简体中文', '繁體中文', '한국어']) {
@@ -151,13 +153,21 @@ test('package ships synchronized public installation documentation', async () =>
     }
     assert.match(readme, /cd \/path\/to\/your-project/, `${path} must change to the target project`);
     assert.match(readme, /node \/path\/to\/agent-language-policy\/bin\/agent-language-policy\.mjs install/, `${path} must invoke the checkout from the target project`);
+    assert.match(readme, /npx skills add cacohe\/agent-language-policy --skill human-decision-language/);
+    assert.match(readme, readmeRequirements[path], `${path} must explain the Skill-only boundary`);
+    assert.match(readme, /docs\/architecture\.md/);
+    assert.match(readme, /https:\/\/github\.com\/cacohe\/agent-language-policy\/issues/);
+    assert.doesNotMatch(readme, /CONTRIBUTING\.md/);
     assert.match(readme, /npm[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
     assert.match(readme, /(marketplace|市场|市集|마켓플레이스)[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
   }
 
-  for (const path of ['README.zh-CN.md', 'README.zh-TW.md', 'README.ko-KR.md', 'CHANGELOG.md', 'CONTRIBUTING.md', 'SECURITY.md']) {
+  for (const path of ['README.zh-CN.md', 'README.zh-TW.md', 'README.ko-KR.md', 'CHANGELOG.md', 'SECURITY.md', 'docs/architecture.md']) {
     assert.ok(packageJson.files.includes(path), `package must include ${path}`);
   }
+  assert.equal(packageJson.files.includes('CONTRIBUTING.md'), false);
+  await readFile(new URL('../docs/architecture.md', import.meta.url), 'utf8');
+  await assert.rejects(readFile(new URL('../CONTRIBUTING.md', import.meta.url), 'utf8'), /ENOENT/);
 
   const security = await readFile(new URL('../SECURITY.md', import.meta.url), 'utf8');
   assert.match(security, /Private Vulnerability Reporting/);
