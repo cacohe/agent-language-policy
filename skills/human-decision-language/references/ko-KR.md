@@ -1,0 +1,20 @@
+# Korean Policy
+
+- locale: ko-KR
+- languageName: 한국어
+
+## Rules
+
+사람이 소프트웨어 개발 작업을 이해하고 평가하며 승인, 거부 또는 통제하기 위해 읽는 내용은 한국어로 작성해야 합니다.
+
+소스 코드, 식별자, API, 타입명, 함수명, 변수명, 파일 경로, 명령어, 옵션, 패키지명, 의존성명, 설정 키, 환경 변수, 프로토콜명, 로그, 스택 추적 및 원본 오류는 원문을 유지해야 합니다.
+
+README, 제품 문서, UI 문구, 코드 주석, docstring, commit message, PR 내용, changelog 및 공개 API 문서는 개인 대화 언어가 아니라 현재 사용자 요청, 프로젝트 규칙 및 대상 독자를 따릅니다.
+
+설계, 아키텍처, 명세 또는 구현 계획의 승인을 요청하기 전에 설명 문장이 한국어인지 확인하고, 그렇지 않으면 먼저 다시 작성합니다.
+
+## Approval check
+
+- Human-readable explanations use Korean.
+- Technical literals remain unchanged.
+- Project-owned content follows its audience and repository conventions.

@@ -1,5 +1,7 @@
 import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
+import { basename } from 'node:path';
+import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
@@ -73,6 +75,39 @@ test('portable skill has valid minimum Agent Skills frontmatter', async () => {
   assert.ok(frontmatter, 'SKILL.md must start with YAML frontmatter');
   assert.match(frontmatter[1], /^name: human-decision-language$/m);
   assert.match(frontmatter[1], /^description: .+/m);
+});
+
+test('portable skill is self-contained and synchronized with language profiles', async () => {
+  const skillUrl = new URL('../skills/human-decision-language/SKILL.md', import.meta.url);
+  const skill = await readFile(skillUrl, 'utf8');
+  const frontmatter = skill.match(/^---\r?\n([\s\S]*?)\r?\n---/);
+  const name = frontmatter?.[1].match(/^name:\s*(.+)$/m)?.[1];
+  const description = frontmatter?.[1].match(/^description:\s*(.+)$/m)?.[1];
+
+  assert.equal(name, basename(fileURLToPath(new URL('.', skillUrl))));
+  assert.ok(description.length >= 1 && description.length <= 1024);
+  assert.match(frontmatter[1], /^license: Apache-2\.0$/m);
+  assert.doesNotMatch(frontmatter[1], /^allowed-tools:/m);
+  assert.match(skill, /\.agent-language-policy\.yaml/);
+
+  for (const locale of ['zh-CN', 'zh-TW', 'ko-KR']) {
+    const referencePath = `references/${locale}.md`;
+    assert.match(skill, new RegExp(referencePath.replaceAll('/', '\\/')));
+    const reference = await readFile(new URL(`../skills/human-decision-language/${referencePath}`, import.meta.url), 'utf8');
+    const profile = await readJson(new URL(`../policy/profiles/${locale}.json`, import.meta.url));
+
+    assert.match(reference, new RegExp(`locale: ${locale}`));
+    for (const field of ['decisionRule', 'technicalRule', 'projectRule', 'approvalRule']) {
+      assert.ok(reference.includes(profile[field]), `${referencePath} must include ${field}`);
+    }
+  }
+
+  const links = [...skill.matchAll(/\[[^\]]+\]\(([^)]+)\)/g)].map((match) => match[1]);
+  assert.ok(links.length >= 5);
+  for (const link of links) {
+    assert.equal(link.startsWith('../'), false, `Skill link must stay inside its root: ${link}`);
+    await readFile(new URL(`../skills/human-decision-language/${link}`, import.meta.url), 'utf8');
+  }
 });
 
 test('package ships English default README with Chinese and Korean alternatives', async () => {

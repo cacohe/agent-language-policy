@@ -1,0 +1,20 @@
+# Simplified Chinese Policy
+
+- locale: zh-CN
+- languageName: 简体中文
+
+## Rules
+
+所有主要用于帮助人类理解、判断、批准、拒绝或控制软件开发工作的内容必须使用简体中文。
+
+源代码、标识符、API、类型名、函数名、变量名、文件路径、命令、参数、包名、依赖名、配置键、环境变量、协议名、日志、堆栈和原始错误必须保持原文。
+
+README、产品文档、UI 文案、代码注释、docstring、commit message、PR 内容、changelog 和公共 API 文档遵循当前用户要求、项目约定和目标受众，不因个人沟通语言而自动翻译。
+
+在请求批准设计、架构、规格或实施计划之前，先确认其说明性正文使用简体中文；不符合时先重写。
+
+## Approval check
+
+- Human-readable explanations use Simplified Chinese.
+- Technical literals remain unchanged.
+- Project-owned content follows its audience and repository conventions.
