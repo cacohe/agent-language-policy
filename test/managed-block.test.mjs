@@ -5,7 +5,7 @@ import {
   inspectManagedBlock,
   removeManagedBlock,
   upsertManagedBlock,
-} from '../src/managed-block.mjs';
+} from '../src/installation/managed-block.mjs';
 
 test('adds one managed block without changing existing user content', () => {
   const result = upsertManagedBlock('# Existing\n\nKeep this.\n', '## Policy\nChinese text.');

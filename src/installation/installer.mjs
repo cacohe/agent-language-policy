@@ -3,8 +3,8 @@ import { dirname } from 'node:path';
 
 import { getInstructionTarget } from './adapters.mjs';
 import { inspectManagedBlock, removeManagedBlock, upsertManagedBlock } from './managed-block.mjs';
-import { renderManagedPolicy } from './policy-renderer.mjs';
-import { loadLanguageProfile } from './profiles.mjs';
+import { renderManagedPolicy } from '../configuration/policy-renderer.mjs';
+import { loadLanguageProfile } from '../configuration/profiles.mjs';
 
 const CURSOR_HEADER = ['---', 'description: Keep human decision content in the configured language', 'alwaysApply: true', '---', ''].join('\n');
 

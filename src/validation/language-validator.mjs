@@ -1,3 +1,4 @@
+/** Validate human-readable Markdown prose against a configured language. */
 import { extractHumanProse } from './markdown-prose.mjs';
 
 const TARGET_PATTERNS = Object.freeze({

@@ -1,3 +1,4 @@
+/** Resolve project, user, and command-line language configuration. */
 import { readFile } from 'node:fs/promises';
 
 import { SUPPORTED_LOCALES } from './profiles.mjs';

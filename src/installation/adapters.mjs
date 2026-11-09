@@ -1,3 +1,4 @@
+/** Map supported Agents and scopes to their native instruction targets. */
 import { join } from 'node:path';
 
 const SUPPORTED_AGENTS = Object.freeze([

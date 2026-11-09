@@ -5,7 +5,7 @@ import { dirname, join } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
-import { runCli } from '../src/cli.mjs';
+import { runCli } from '../src/cli/cli.mjs';
 
 const sink = { write() {} };
 

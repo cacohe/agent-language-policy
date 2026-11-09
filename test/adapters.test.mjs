@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { join } from 'node:path';
 import test from 'node:test';
 
-import { getInstructionTarget } from '../src/adapters.mjs';
+import { getInstructionTarget } from '../src/installation/adapters.mjs';
 
 const environment = { homeDir: '/home/dev', projectDir: '/work/repo' };
 

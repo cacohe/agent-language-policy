@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { extractHumanProse } from '../src/markdown-prose.mjs';
+import { extractHumanProse } from '../src/validation/markdown-prose.mjs';
 
 test('extracts explanatory prose while excluding code, inline literals, URLs, and managed comments', () => {
   const markdown = [

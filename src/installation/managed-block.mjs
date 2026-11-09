@@ -1,3 +1,4 @@
+/** Safely create, inspect, update, and remove the tool-owned instruction block. */
 const START = '<!-- agent-language-policy:start -->';
 const END = '<!-- agent-language-policy:end -->';
 

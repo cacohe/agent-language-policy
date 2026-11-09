@@ -4,7 +4,7 @@ import { tmpdir } from 'node:os';
 import { join } from 'node:path';
 import test from 'node:test';
 
-import { resolveConfiguration } from '../src/config.mjs';
+import { resolveConfiguration } from '../src/configuration/config.mjs';
 
 test('command line locale overrides project and user configuration', async () => {
   const directory = await mkdtemp(join(tmpdir(), 'alp-config-'));

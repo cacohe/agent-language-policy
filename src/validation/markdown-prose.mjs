@@ -1,3 +1,4 @@
+/** Extract explanatory prose while excluding Markdown technical literals. */
 function stripInlineSyntax(line) {
   return line
     .replace(/<!--.*?-->/g, ' ')

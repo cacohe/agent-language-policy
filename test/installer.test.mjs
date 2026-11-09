@@ -9,7 +9,7 @@ import {
   applyRemoval,
   planInstallation,
   planRemoval,
-} from '../src/installer.mjs';
+} from '../src/installation/installer.mjs';
 
 test('installation preview does not write and apply preserves existing content with backup', async () => {
   const projectDir = await mkdtemp(join(tmpdir(), 'alp-install-'));

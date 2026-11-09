@@ -1,3 +1,4 @@
+/** Render a language profile as a persistent Agent instruction block. */
 export function renderManagedPolicy(profile) {
   return [
     `## ${profile.policyTitle}`,

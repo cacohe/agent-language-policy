@@ -1,12 +1,12 @@
 import { mkdir, readFile, writeFile } from 'node:fs/promises';
 import { dirname, join, resolve } from 'node:path';
 
-import { getInstructionTarget, SUPPORTED_AGENTS } from './adapters.mjs';
-import { resolveConfiguration } from './config.mjs';
-import { inspectManagedBlock } from './managed-block.mjs';
-import { applyInstallation, applyRemoval, planInstallation, planRemoval } from './installer.mjs';
-import { validateDocumentLanguage } from './language-validator.mjs';
-import { SUPPORTED_LOCALES } from './profiles.mjs';
+import { getInstructionTarget, SUPPORTED_AGENTS } from '../installation/adapters.mjs';
+import { resolveConfiguration } from '../configuration/config.mjs';
+import { inspectManagedBlock } from '../installation/managed-block.mjs';
+import { applyInstallation, applyRemoval, planInstallation, planRemoval } from '../installation/installer.mjs';
+import { validateDocumentLanguage } from '../validation/language-validator.mjs';
+import { SUPPORTED_LOCALES } from '../configuration/profiles.mjs';
 
 const HELP = `Agent Language Policy
 

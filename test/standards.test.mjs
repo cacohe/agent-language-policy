@@ -1,10 +1,27 @@
 import assert from 'node:assert/strict';
-import { readFile } from 'node:fs/promises';
+import { readFile, readdir } from 'node:fs/promises';
 import { basename } from 'node:path';
 import { fileURLToPath } from 'node:url';
 import test from 'node:test';
 
 const readJson = async (path) => JSON.parse(await readFile(path, 'utf8'));
+
+test('runtime modules are grouped by function', async () => {
+  const sourceRoot = new URL('../src/', import.meta.url);
+  const expected = {
+    cli: ['cli.mjs'],
+    configuration: ['config.mjs', 'policy-renderer.mjs', 'profiles.mjs'],
+    installation: ['adapters.mjs', 'installer.mjs', 'managed-block.mjs'],
+    validation: ['language-validator.mjs', 'markdown-prose.mjs'],
+  };
+  const rootEntries = await readdir(sourceRoot, { withFileTypes: true });
+
+  assert.deepEqual(rootEntries.filter((entry) => entry.isFile()).map((entry) => entry.name), []);
+  assert.deepEqual(rootEntries.filter((entry) => entry.isDirectory()).map((entry) => entry.name).sort(), Object.keys(expected).sort());
+  for (const [directory, files] of Object.entries(expected)) {
+    assert.deepEqual((await readdir(new URL(`${directory}/`, sourceRoot))).sort(), files.sort());
+  }
+});
 
 test('plugin package exposes a portable skills directory', async () => {
   const plugin = await readJson(new URL('../plugin.json', import.meta.url));

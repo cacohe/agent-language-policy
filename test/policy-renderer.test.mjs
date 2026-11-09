@@ -1,8 +1,8 @@
 import assert from 'node:assert/strict';
 import test from 'node:test';
 
-import { loadLanguageProfile } from '../src/profiles.mjs';
-import { renderManagedPolicy } from '../src/policy-renderer.mjs';
+import { loadLanguageProfile } from '../src/configuration/profiles.mjs';
+import { renderManagedPolicy } from '../src/configuration/policy-renderer.mjs';
 
 test('renders Chinese human decision policy while preserving English technical examples', async () => {
   const profile = await loadLanguageProfile('zh-CN');

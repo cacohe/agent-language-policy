@@ -2,7 +2,7 @@ import assert from 'node:assert/strict';
 import { readFile } from 'node:fs/promises';
 import test from 'node:test';
 
-import { validateDocumentLanguage } from '../src/language-validator.mjs';
+import { validateDocumentLanguage } from '../src/validation/language-validator.mjs';
 
 const fixture = (name) => readFile(new URL(`./fixtures/${name}`, import.meta.url), 'utf8');
 
