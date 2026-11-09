@@ -23,3 +23,14 @@ test('renders Korean human decision policy while preserving English technical ex
   assert.match(result, /`createSession\(\)`/);
   assert.match(result, /`ECONNREFUSED`/);
 });
+
+test('renders Traditional Chinese human decision policy while preserving English technical examples', async () => {
+  const profile = await loadLanguageProfile('zh-TW');
+  const result = renderManagedPolicy(profile);
+
+  assert.equal(profile.languageName, '繁體中文');
+  assert.match(result, /人類決策語言/);
+  assert.match(result, /繁體中文/);
+  assert.match(result, /`createSession\(\)`/);
+  assert.match(result, /`ECONNREFUSED`/);
+});

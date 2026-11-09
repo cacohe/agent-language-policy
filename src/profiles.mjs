@@ -1,6 +1,6 @@
 import { readFile } from 'node:fs/promises';
 
-export const SUPPORTED_LOCALES = Object.freeze(['zh-CN', 'ko-KR']);
+export const SUPPORTED_LOCALES = Object.freeze(['zh-CN', 'zh-TW', 'ko-KR']);
 
 export async function loadLanguageProfile(locale) {
   if (!SUPPORTED_LOCALES.includes(locale)) {

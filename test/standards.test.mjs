@@ -53,7 +53,7 @@ test('release files use Apache-2.0 notices', async () => {
 });
 
 test('language profiles expose the same required policy fields', async () => {
-  for (const locale of ['zh-CN', 'ko-KR']) {
+  for (const locale of ['zh-CN', 'zh-TW', 'ko-KR']) {
     const profile = await readJson(new URL(`../policy/profiles/${locale}.json`, import.meta.url));
 
     assert.equal(profile.locale, locale);

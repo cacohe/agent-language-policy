@@ -19,6 +19,20 @@ test('help lists the supported workflow commands', async () => {
   assert.match(stdout.value(), /install/);
   assert.match(stdout.value(), /validate/);
   assert.match(stdout.value(), /uninstall/);
+  assert.match(stdout.value(), /zh-CN, zh-TW, ko-KR/);
+});
+
+test('doctor lists all supported languages', async () => {
+  const stdout = capture();
+  const code = await runCli(['doctor'], {
+    stdout,
+    stderr: capture(),
+    cwd: process.cwd(),
+    homeDir: process.cwd(),
+  });
+
+  assert.equal(code, 0);
+  assert.match(stdout.value(), /zh-CN, zh-TW, ko-KR/);
 });
 
 test('dry-run previews installation without writing the instruction file', async () => {

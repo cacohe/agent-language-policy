@@ -40,3 +40,9 @@ test('configuration rejects unsupported locales', async () => {
     /Unsupported target language: fr-FR/,
   );
 });
+
+test('configuration accepts Traditional Chinese from the command line', async () => {
+  const result = await resolveConfiguration({ cliLocale: 'zh-TW' });
+
+  assert.deepEqual(result, { locale: 'zh-TW', source: 'cli' });
+});

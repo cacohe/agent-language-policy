@@ -18,7 +18,7 @@ Usage:
   agent-language-policy validate <file> --language <locale>
   agent-language-policy uninstall --agent <name> --scope <project|user> [--dry-run]
 
-Languages: zh-CN, ko-KR
+Languages: zh-CN, zh-TW, ko-KR
 Agents: codex, claude-code, cursor, gemini-cli, github-copilot
 `;
 
