@@ -46,7 +46,9 @@ const skill = await readFile('skills/human-decision-language/SKILL.md', 'utf8');
 if (!skill.startsWith('---\n') && !skill.startsWith('---\r\n')) {
   throw new Error('SKILL.md is missing frontmatter');
 }
-if (!/^license: Apache-2\.0$/m.test(skill)) throw new Error('SKILL.md must use Apache-2.0');
+if (/^(license|metadata):/m.test(skill)) {
+  throw new Error('SKILL.md frontmatter must contain only the required portable fields');
+}
 
 if (!process.argv.includes('--skip-tests')) {
   const result = spawnSync(process.execPath, ['--test'], { stdio: 'inherit' });

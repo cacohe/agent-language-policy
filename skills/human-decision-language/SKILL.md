@@ -1,9 +1,6 @@
 ---
 name: human-decision-language
 description: Use during software-development work that produces plans, designs, reviews, approval requests, progress updates, or other human-facing decision content that must follow a configured language while technical literals and project-owned conventions remain unchanged.
-license: Apache-2.0
-metadata:
-  version: "0.1.0"
 ---
 
 # Human Decision Language
