@@ -49,6 +49,7 @@ try {
     'SECURITY.md',
     'docs/architecture.md',
     'docs/architecture.zh-CN.md',
+    'docs/capabilities.zh-CN.md',
     'plugin.json',
     '.codex-plugin/plugin.json',
     '.claude-plugin/plugin.json',

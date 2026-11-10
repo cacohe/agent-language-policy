@@ -34,7 +34,7 @@
     "prepack": "npm run verify -- --skip-tests"
   },
   "bin": {
-    "agent-language-policy": "./bin/agent-language-policy.mjs"
+    "agent-language-policy": "bin/agent-language-policy.mjs"
   },
   "files": [
     "bin/",
@@ -53,6 +53,7 @@
     "SECURITY.md",
     "docs/architecture.md",
     "docs/architecture.zh-CN.md",
+    "docs/capabilities.zh-CN.md",
     "LICENSE",
     "NOTICE"
   ]

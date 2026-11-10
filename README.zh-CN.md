@@ -70,7 +70,7 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --ag
 
 卸载只删除工具管理的区块。安装器修改已有文件前会创建备份，且 Skill 不预授权工具或 shell 权限。五种 Agent 的文件映射均有自动化测试，但尚未通过公开市场上架验证。
 
-设计、项目政策和历史见[架构说明](docs/architecture.zh-CN.md)、[SECURITY.md](SECURITY.md) 和 [CHANGELOG.md](CHANGELOG.md)。普通问题请提交到 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)，安全漏洞请按 `SECURITY.md` 中的私密流程报告。
+项目能力与使用方法见[核心能力与使用方式](docs/capabilities.zh-CN.md)，设计、项目政策和历史见[架构说明](docs/architecture.zh-CN.md)、[SECURITY.md](SECURITY.md) 和 [CHANGELOG.md](CHANGELOG.md)。普通问题请提交到 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)，安全漏洞请按 `SECURITY.md` 中的私密流程报告。
 
 ## 开发
 
