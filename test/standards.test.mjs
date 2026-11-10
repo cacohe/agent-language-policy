@@ -167,12 +167,17 @@ test('package ships synchronized public installation documentation', async () =>
     assert.match(readme, /(marketplace|市场|市集|마켓플레이스)[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
   }
 
-  for (const path of ['README.zh-CN.md', 'README.zh-TW.md', 'README.ko-KR.md', 'CHANGELOG.md', 'SECURITY.md', 'docs/architecture.md', 'docs/architecture.zh-CN.md']) {
+  for (const path of ['README.zh-CN.md', 'README.zh-TW.md', 'README.ko-KR.md', 'CHANGELOG.md', 'SECURITY.md', 'docs/architecture.md', 'docs/architecture.zh-CN.md', 'docs/capabilities.zh-CN.md']) {
     assert.ok(packageJson.files.includes(path), `package must include ${path}`);
   }
   assert.equal(packageJson.files.includes('CONTRIBUTING.md'), false);
   await readFile(new URL('../docs/architecture.md', import.meta.url), 'utf8');
   await readFile(new URL('../docs/architecture.zh-CN.md', import.meta.url), 'utf8');
+  const capabilities = await readFile(new URL('../docs/capabilities.zh-CN.md', import.meta.url), 'utf8');
+  assert.match(readmes.find(([path]) => path === 'README.zh-CN.md')[1], /docs\/capabilities\.zh-CN\.md/);
+  for (const heading of ['可移植语言策略 Skill', 'Agent 常驻语言指令', 'Markdown 文档语言校验', '配置和生命周期管理 CLI', '推荐使用组合']) {
+    assert.match(capabilities, new RegExp(`^## ${heading}$`, 'm'));
+  }
   await assert.rejects(readFile(new URL('../CONTRIBUTING.md', import.meta.url), 'utf8'), /ENOENT/);
 
   const security = await readFile(new URL('../SECURITY.md', import.meta.url), 'utf8');
