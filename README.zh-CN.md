@@ -11,17 +11,29 @@
 - 交付形式：可移植 Agent Skill、项目级或用户级常驻指令、CLI 和 Markdown 校验器。
 - 运行环境：Node.js 20 或更高版本，无运行时依赖。
 
-npm 包尚未发布，市场（marketplace）版本也尚未发布。正式发布前请从可信的仓库检出版本安装。
+npm 包已发布为 [`agent-language-policy`](https://www.npmjs.com/package/agent-language-policy)，portable Skill 已包含在 [GitHub `v0.1.0` Release](https://github.com/cacohe/agent-language-policy/releases/tag/v0.1.0) 中。Cursor Marketplace 正在审核，Gemini CLI Gallery 等待自动收录，OpenAI 和 Claude 目录尚未提交。
 
 ## 安装 portable Skill
 
-拥有仓库访问权限时，可以使用社区 `skills` CLI 把 `human-decision-language` 安装到支持的 Agent：
+可以使用社区 `skills` CLI 把 `human-decision-language` 安装到支持的 Agent：
 
 ```bash
 npx skills add cacohe/agent-language-policy --skill human-decision-language
 ```
 
-该命令只安装 portable Skill，不安装常驻指令，不创建配置，也不提供 Markdown 校验器。如需这些能力，请按照下文说明从源码单独安装策略 CLI。
+该命令只安装 portable Skill，不安装常驻指令，不创建配置，也不提供 Markdown 校验器。如需这些能力，请通过 npm 或源码单独使用策略 CLI。
+
+## 从 npm 使用策略 CLI
+
+无需全局安装即可运行已发布的 CLI：
+
+```bash
+npx --yes --package agent-language-policy@latest -- agent-language-policy doctor
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language zh-CN --dry-run
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language zh-CN
+```
+
+请在需要写入常驻规则的目标项目中运行命令。可将 `codex` 和 `zh-CN` 替换为其他受支持的 Agent 与语言。
 
 ## 策略边界
 
@@ -68,7 +80,7 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --ag
 node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project
 ```
 
-卸载只删除工具管理的区块。安装器修改已有文件前会创建备份，且 Skill 不预授权工具或 shell 权限。五种 Agent 的文件映射均有自动化测试，但尚未通过公开市场上架验证。
+卸载只删除工具管理的区块。安装器修改已有文件前会创建备份，且 Skill 不预授权工具或 shell 权限。五种 Agent 的文件映射均有自动化测试，npm 包与 GitHub Release 已公开；Cursor 审核和 Gemini CLI Gallery 收录仍在等待外部处理，OpenAI 与 Claude 目录尚未提交。
 
 项目能力与使用方法见[核心能力与使用方式](docs/capabilities.zh-CN.md)，设计、项目政策和历史见[架构说明](docs/architecture.zh-CN.md)、[SECURITY.md](SECURITY.md) 和 [CHANGELOG.md](CHANGELOG.md)。普通问题请提交到 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)，安全漏洞请按 `SECURITY.md` 中的私密流程报告。
 

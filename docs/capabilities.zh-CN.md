@@ -41,7 +41,15 @@ Use the human-decision-language skill for this development task.
 | Gemini CLI | `GEMINI.md` | `~/.gemini/GEMINI.md` |
 | GitHub Copilot | `.github/copilot-instructions.md` | `~/.copilot/copilot-instructions.md` |
 
-npm 包尚未发布，目前需要从可信的源码检出版本运行 CLI：
+npm 包已经发布，可以直接在需要应用语言策略的项目中运行 CLI：
+
+```bash
+npx --yes --package agent-language-policy@latest -- agent-language-policy doctor
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language zh-CN --dry-run
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language zh-CN
+```
+
+如需审查源码或参与开发，也可以从可信的源码检出版本运行 CLI：
 
 ```bash
 git clone https://github.com/cacohe/agent-language-policy.git /path/to/agent-language-policy
@@ -50,7 +58,7 @@ npm test
 cd /path/to/your-project
 ```
 
-先预览，再正式安装：
+从源码运行时同样应先预览，再正式安装：
 
 ```bash
 node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agent codex --scope project --language zh-CN --dry-run
