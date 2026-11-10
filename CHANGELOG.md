@@ -4,7 +4,9 @@ All notable changes to this project are documented in this file. The format is b
 
 ## [Unreleased]
 
-No changes yet.
+### Changed
+
+- Updated the installation and distribution documentation after the npm package and GitHub release became public.
 
 ## [0.1.0] - 2026-11-09
 

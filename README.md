@@ -11,17 +11,29 @@ Keep the explanations that developers must review in a chosen language while pre
 - Delivery: a portable Agent Skill, persistent project or user instructions, a CLI, and a Markdown validator.
 - Runtime: Node.js 20 or later, with no runtime dependencies.
 
-The npm package is not yet published. The marketplace package is not yet published either. Install from a trusted checkout until a release is announced.
+The npm package is published as [`agent-language-policy`](https://www.npmjs.com/package/agent-language-policy). The portable Skill is available in the [GitHub `v0.1.0` release](https://github.com/cacohe/agent-language-policy/releases/tag/v0.1.0). The Cursor Marketplace submission is under review, Gemini CLI Gallery automatic indexing is pending, and OpenAI and Claude directory submissions have not been made.
 
 ## Install the portable Skill
 
-With repository access, the community `skills` CLI can install `human-decision-language` into a supported Agent:
+The community `skills` CLI can install `human-decision-language` into a supported Agent:
 
 ```bash
 npx skills add cacohe/agent-language-policy --skill human-decision-language
 ```
 
-This command installs only the portable Skill. It does not install persistent instructions, create configuration, or provide the Markdown validator. Install the policy CLI separately from source as described below when you need those capabilities.
+This command installs only the portable Skill. It does not install persistent instructions, create configuration, or provide the Markdown validator. Install the policy CLI separately from npm or source when you need those capabilities.
+
+## Install the policy CLI from npm
+
+Run the published CLI without a permanent global installation:
+
+```bash
+npx --yes --package agent-language-policy@latest -- agent-language-policy doctor
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language zh-CN --dry-run
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language zh-CN
+```
+
+Run these commands from the project that should receive the persistent rule. Replace `codex` with another supported Agent and `zh-CN` with `zh-TW` or `ko-KR` as needed.
 
 ## Policy boundaries
 
@@ -79,7 +91,7 @@ Uninstalling removes only the managed block.
 
 ## Trust and compatibility
 
-Review the Skill and generated instruction block before installation. The installer creates a backup before changing an existing file and never grants tools or shell permissions. The file mappings for all five Agents are covered by automated tests; marketplace packaging has not yet been verified through a public listing.
+Review the Skill and generated instruction block before installation. The installer creates a backup before changing an existing file and never grants tools or shell permissions. The file mappings for all five Agents are covered by automated tests, and the npm package and GitHub release are public. Cursor review and Gemini CLI Gallery indexing remain external pending steps; OpenAI and Claude directory submissions have not been made.
 
 See [Architecture](docs/architecture.md), [SECURITY.md](SECURITY.md), and [CHANGELOG.md](CHANGELOG.md) for design, project policies, and release history. Report ordinary problems through [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues); report vulnerabilities through the private process in `SECURITY.md`.
 

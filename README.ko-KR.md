@@ -11,17 +11,29 @@
 - 제공 방식: 이식 가능한 Agent Skill, 프로젝트 또는 사용자 영구 지침, CLI, Markdown 검증기.
 - 런타임: Node.js 20 이상, 런타임 의존성 없음.
 
-npm 패키지는 아직 게시되지 않았습니다. 마켓플레이스 패키지도 아직 게시되지 않았습니다. 공식 릴리스 전에는 신뢰할 수 있는 저장소 체크아웃에서 설치하세요.
+npm 패키지가 게시되었습니다: [`agent-language-policy`](https://www.npmjs.com/package/agent-language-policy). portable Skill은 [GitHub `v0.1.0` 릴리스](https://github.com/cacohe/agent-language-policy/releases/tag/v0.1.0)에 포함되어 있습니다. Cursor Marketplace 제출은 검토 중이고 Gemini CLI Gallery 자동 색인은 대기 중이며 OpenAI 및 Claude 디렉터리에는 아직 제출하지 않았습니다.
 
 ## portable Skill 설치
 
-저장소 접근 권한이 있으면 커뮤니티 `skills` CLI로 지원되는 Agent에 `human-decision-language`를 설치할 수 있습니다.
+커뮤니티 `skills` CLI로 지원되는 Agent에 `human-decision-language`를 설치할 수 있습니다.
 
 ```bash
 npx skills add cacohe/agent-language-policy --skill human-decision-language
 ```
 
-이 명령은 portable Skill만 설치합니다. 영구 지침을 설치하거나 설정을 만들거나 Markdown 검증기를 제공하지 않습니다. 이러한 기능이 필요하면 아래 설명에 따라 소스에서 정책 CLI를 별도로 설치하세요.
+이 명령은 portable Skill만 설치합니다. 영구 지침을 설치하거나 설정을 만들거나 Markdown 검증기를 제공하지 않습니다. 이러한 기능이 필요하면 npm 또는 소스에서 정책 CLI를 별도로 사용하세요.
+
+## npm에서 정책 CLI 사용
+
+전역 설치 없이 게시된 CLI를 실행할 수 있습니다.
+
+```bash
+npx --yes --package agent-language-policy@latest -- agent-language-policy doctor
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language ko-KR --dry-run
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language ko-KR
+```
+
+영구 규칙을 추가할 대상 프로젝트에서 명령을 실행하세요. 필요에 따라 `codex`와 `ko-KR`을 지원되는 다른 Agent 및 언어로 바꿀 수 있습니다.
 
 ## 정책 범위
 
@@ -68,7 +80,7 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --ag
 node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project
 ```
 
-제거 시 도구가 관리하는 블록만 삭제합니다. 설치 프로그램은 기존 파일 변경 전에 백업을 만들고 Skill은 도구나 shell 권한을 사전 승인하지 않습니다. 다섯 에이전트의 파일 매핑은 자동화 테스트로 검증하지만 공개 마켓플레이스 등록은 아직 검증하지 않았습니다.
+제거 시 도구가 관리하는 블록만 삭제합니다. 설치 프로그램은 기존 파일 변경 전에 백업을 만들고 Skill은 도구나 shell 권한을 사전 승인하지 않습니다. 다섯 에이전트의 파일 매핑은 자동화 테스트로 검증되며 npm 패키지와 GitHub 릴리스는 공개되어 있습니다. Cursor 검토와 Gemini CLI Gallery 색인은 외부 처리를 기다리고 있으며 OpenAI 및 Claude 디렉터리에는 아직 제출하지 않았습니다.
 
 설계, 프로젝트 정책 및 기록은 [Architecture](docs/architecture.md), [SECURITY.md](SECURITY.md), [CHANGELOG.md](CHANGELOG.md)를 참조하세요. 일반적인 문제는 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)에 제출하고 보안 취약점은 `SECURITY.md`의 비공개 절차로 보고하세요.
 

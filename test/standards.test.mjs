@@ -136,6 +136,18 @@ test('package ships synchronized public installation documentation', async () =>
     'README.zh-TW.md': /只安裝.*portable Skill/,
     'README.ko-KR.md': /portable Skill.*만 설치/,
   };
+  const publicationRequirements = {
+    'README.md': /npm package is published/i,
+    'README.zh-CN.md': /npm 包已发布/,
+    'README.zh-TW.md': /npm 套件已發佈/,
+    'README.ko-KR.md': /npm 패키지가 게시되었습니다/,
+  };
+  const distributionStatusRequirements = {
+    'README.md': /Cursor Marketplace submission is under review.*Gemini CLI Gallery automatic indexing is pending.*OpenAI and Claude directory submissions have not been made/i,
+    'README.zh-CN.md': /Cursor Marketplace 正在审核.*Gemini CLI Gallery 等待自动收录.*OpenAI 和 Claude 目录尚未提交/,
+    'README.zh-TW.md': /Cursor Marketplace 正在審核.*Gemini CLI Gallery 等待自動收錄.*OpenAI 與 Claude 目錄尚未提交/,
+    'README.ko-KR.md': /Cursor Marketplace 제출은 검토 중.*Gemini CLI Gallery 자동 색인은 대기 중.*OpenAI 및 Claude 디렉터리에는 아직 제출하지 않았습니다/,
+  };
   const readmes = await Promise.all(Object.keys(readmeRequirements)
     .map(async (path) => [path, await readFile(new URL(`../${path}`, import.meta.url), 'utf8')]));
 
@@ -163,8 +175,11 @@ test('package ships synchronized public installation documentation', async () =>
     }
     assert.match(readme, /https:\/\/github\.com\/cacohe\/agent-language-policy\/issues/);
     assert.doesNotMatch(readme, /CONTRIBUTING\.md/);
-    assert.match(readme, /npm[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
-    assert.match(readme, /(marketplace|市场|市集|마켓플레이스)[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
+    assert.match(readme, publicationRequirements[path], `${path} must state that the npm package is published`);
+    assert.match(readme, distributionStatusRequirements[path], `${path} must describe pending directory publication accurately`);
+    assert.match(readme, /https:\/\/www\.npmjs\.com\/package\/agent-language-policy/);
+    assert.match(readme, /https:\/\/github\.com\/cacohe\/agent-language-policy\/releases\/tag\/v0\.1\.0/);
+    assert.doesNotMatch(readme, /npm[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
   }
 
   for (const path of ['README.zh-CN.md', 'README.zh-TW.md', 'README.ko-KR.md', 'CHANGELOG.md', 'SECURITY.md', 'docs/architecture.md', 'docs/architecture.zh-CN.md', 'docs/capabilities.zh-CN.md']) {

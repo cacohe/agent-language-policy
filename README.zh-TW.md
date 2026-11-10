@@ -11,17 +11,29 @@
 - 交付形式：可攜式 Agent Skill、專案或使用者層級常駐指令、CLI 和 Markdown 驗證器。
 - 執行環境：Node.js 20 或更新版本，沒有執行階段相依套件。
 
-npm 套件尚未發佈，市集（marketplace）版本也尚未發佈。正式發佈前請從可信任的儲存庫檢出版本安裝。
+npm 套件已發佈為 [`agent-language-policy`](https://www.npmjs.com/package/agent-language-policy)，portable Skill 已包含在 [GitHub `v0.1.0` Release](https://github.com/cacohe/agent-language-policy/releases/tag/v0.1.0) 中。Cursor Marketplace 正在審核，Gemini CLI Gallery 等待自動收錄，OpenAI 與 Claude 目錄尚未提交。
 
 ## 安裝 portable Skill
 
-擁有儲存庫存取權限時，可以使用社群 `skills` CLI 將 `human-decision-language` 安裝到支援的 Agent：
+可以使用社群 `skills` CLI 將 `human-decision-language` 安裝到支援的 Agent：
 
 ```bash
 npx skills add cacohe/agent-language-policy --skill human-decision-language
 ```
 
-此指令只安裝 portable Skill，不安裝常駐指令、不建立設定，也不提供 Markdown 驗證器。如需這些能力，請依照下文說明從原始碼另外安裝策略 CLI。
+此指令只安裝 portable Skill，不安裝常駐指令、不建立設定，也不提供 Markdown 驗證器。如需這些能力，請透過 npm 或原始碼另外使用策略 CLI。
+
+## 從 npm 使用策略 CLI
+
+無需全域安裝即可執行已發佈的 CLI：
+
+```bash
+npx --yes --package agent-language-policy@latest -- agent-language-policy doctor
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language zh-TW --dry-run
+npx --yes --package agent-language-policy@latest -- agent-language-policy install --agent codex --scope project --language zh-TW
+```
+
+請在需要寫入常駐規則的目標專案中執行指令。可將 `codex` 和 `zh-TW` 替換為其他支援的 Agent 與語言。
 
 ## 策略邊界
 
@@ -68,7 +80,7 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --ag
 node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --agent codex --scope project
 ```
 
-解除安裝只會刪除工具管理的區塊。安裝器修改既有檔案前會建立備份，Skill 也不會預先授權工具或 shell 權限。五種 Agent 的檔案對應均有自動化測試，但尚未經過公開市集上架驗證。
+解除安裝只會刪除工具管理的區塊。安裝器修改既有檔案前會建立備份，Skill 也不會預先授權工具或 shell 權限。五種 Agent 的檔案對應均有自動化測試，npm 套件與 GitHub Release 已公開；Cursor 審核與 Gemini CLI Gallery 收錄仍在等待外部處理，OpenAI 與 Claude 目錄尚未提交。
 
 設計、專案政策與歷史請參閱[架構說明](docs/architecture.md)、[SECURITY.md](SECURITY.md) 和 [CHANGELOG.md](CHANGELOG.md)。一般問題請提交至 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)，安全漏洞請依 `SECURITY.md` 的私密流程回報。
 
