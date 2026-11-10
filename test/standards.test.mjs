@@ -103,7 +103,8 @@ test('portable skill is self-contained and synchronized with language profiles',
 
   assert.equal(name, basename(fileURLToPath(new URL('.', skillUrl))));
   assert.ok(description.length >= 1 && description.length <= 1024);
-  assert.match(frontmatter[1], /^license: Apache-2\.0$/m);
+  assert.doesNotMatch(frontmatter[1], /^license:/m);
+  assert.doesNotMatch(frontmatter[1], /^metadata:/m);
   assert.doesNotMatch(frontmatter[1], /^allowed-tools:/m);
   assert.match(skill, /\.agent-language-policy\.yaml/);
 
