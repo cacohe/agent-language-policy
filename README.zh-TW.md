@@ -21,7 +21,7 @@ npm 套件尚未發佈，市集（marketplace）版本也尚未發佈。正式�
 npx skills add cacohe/agent-language-policy --skill human-decision-language
 ```
 
-此指令只安裝 portable Skill，不安裝常駐指令、不建立設定，也不提供 Markdown 驗證器。如需這些能力，請另外安裝策略 CLI。兩種安裝路徑的差異請參閱[架構說明](docs/architecture.md)。
+此指令只安裝 portable Skill，不安裝常駐指令、不建立設定，也不提供 Markdown 驗證器。如需這些能力，請依照下文說明從原始碼另外安裝策略 CLI。
 
 ## 策略邊界
 
@@ -44,7 +44,20 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agen
 
 可將 `codex` 替換為 `claude-code`、`cursor`、`gemini-cli` 或 `github-copilot`，目標語言也可改成 `zh-CN` 或 `ko-KR`。Cursor 使用者規則需依 CLI 提示手動設定。
 
-可攜式 Skill 位於 `skills/human-decision-language/`。可將該目錄複製到相容 Agent Skills 的可信任 Skill 目錄，或使用 Agent 的儲存庫安裝功能。若要涵蓋每次開發工作，仍建議同時安裝常駐指令。
+## 儲存庫目錄
+
+| 路徑 | 職責 |
+| --- | --- |
+| `skills/` | 可攜式 Agent Skills 及其自包含參考資料 |
+| `policy/` | CLI 使用的規範語言資料 |
+| `src/cli/` | 指令解析與編排 |
+| `src/configuration/` | 設定解析、語言設定載入和策略產生 |
+| `src/installation/` | Agent 介面卡和受管理區塊生命週期 |
+| `src/validation/` | Markdown 本文擷取和語言驗證 |
+| `bin/` | 可執行進入點 |
+| `scripts/` | 靜態驗證和套件發佈驗證 |
+| `test/` | 單元、整合、結構和套件測試 |
+| `.github/workflows/` | 跨平台持續整合 |
 
 ## 狀態、驗證與解除安裝
 

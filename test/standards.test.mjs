@@ -156,23 +156,52 @@ test('package ships synchronized public installation documentation', async () =>
     assert.match(readme, /node \/path\/to\/agent-language-policy\/bin\/agent-language-policy\.mjs install/, `${path} must invoke the checkout from the target project`);
     assert.match(readme, /npx skills add cacohe\/agent-language-policy --skill human-decision-language/);
     assert.match(readme, readmeRequirements[path], `${path} must explain the Skill-only boundary`);
-    assert.match(readme, /docs\/architecture\.md/);
+    const architecturePath = path === 'README.zh-CN.md' ? 'docs/architecture.zh-CN.md' : 'docs/architecture.md';
+    assert.match(readme, new RegExp(architecturePath.replaceAll('.', '\\.')));
+    for (const directory of ['skills/', 'policy/', 'src/cli/', 'src/configuration/', 'src/installation/', 'src/validation/', 'bin/', 'scripts/', 'test/', '.github/workflows/']) {
+      assert.match(readme, new RegExp(directory.replaceAll('.', '\\.').replaceAll('/', '\\/')), `${path} must map ${directory}`);
+    }
     assert.match(readme, /https:\/\/github\.com\/cacohe\/agent-language-policy\/issues/);
     assert.doesNotMatch(readme, /CONTRIBUTING\.md/);
     assert.match(readme, /npm[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
     assert.match(readme, /(marketplace|市场|市集|마켓플레이스)[^\n]*(not yet published|尚未发布|尚未發佈|아직 게시되지)/i);
   }
 
-  for (const path of ['README.zh-CN.md', 'README.zh-TW.md', 'README.ko-KR.md', 'CHANGELOG.md', 'SECURITY.md', 'docs/architecture.md']) {
+  for (const path of ['README.zh-CN.md', 'README.zh-TW.md', 'README.ko-KR.md', 'CHANGELOG.md', 'SECURITY.md', 'docs/architecture.md', 'docs/architecture.zh-CN.md']) {
     assert.ok(packageJson.files.includes(path), `package must include ${path}`);
   }
   assert.equal(packageJson.files.includes('CONTRIBUTING.md'), false);
   await readFile(new URL('../docs/architecture.md', import.meta.url), 'utf8');
+  await readFile(new URL('../docs/architecture.zh-CN.md', import.meta.url), 'utf8');
   await assert.rejects(readFile(new URL('../CONTRIBUTING.md', import.meta.url), 'utf8'), /ENOENT/);
 
   const security = await readFile(new URL('../SECURITY.md', import.meta.url), 'utf8');
   assert.match(security, /Private Vulnerability Reporting/);
   assert.doesNotMatch(security, /@[A-Za-z0-9.-]+\.[A-Za-z]{2,}/);
+});
+
+test('Chinese architecture documentation mirrors the English document structure', async () => {
+  const english = await readFile(new URL('../docs/architecture.md', import.meta.url), 'utf8');
+  const chinese = await readFile(new URL('../docs/architecture.zh-CN.md', import.meta.url), 'utf8');
+  const headings = (document) => document.match(/^#{1,6} .+$/gm) ?? [];
+  const codeBlocks = (document) => document.match(/```[\s\S]*?```/g) ?? [];
+
+  assert.equal(headings(chinese).length, headings(english).length);
+  assert.deepEqual(codeBlocks(chinese), codeBlocks(english));
+
+  for (const literal of ['skills/human-decision-language/', 'policy/profiles/', 'src/configuration/', 'src/installation/', 'src/validation/', 'src/cli/', 'bin/agent-language-policy.mjs']) {
+    assert.ok(english.includes(literal), `English architecture must include ${literal}`);
+    assert.ok(chinese.includes(literal), `Chinese architecture must include ${literal}`);
+  }
+});
+
+test('architecture documents exclude installation paths and repository mapping', async () => {
+  for (const path of ['docs/architecture.md', 'docs/architecture.zh-CN.md']) {
+    const document = await readFile(new URL(`../${path}`, import.meta.url), 'utf8');
+    assert.doesNotMatch(document, /npx skills add/);
+    assert.doesNotMatch(document, /^## (Two installation paths|Repository map|两条安装路径|仓库目录映射)$/m);
+    assert.doesNotMatch(document, /^\| (Path|路径) \|/m);
+  }
 });
 
 test('current public documents avoid provisional product positioning', async () => {

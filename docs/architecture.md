@@ -59,32 +59,3 @@ src/configuration/  --->  src/installation/  --->  Agent instruction file
 skills/human-decision-language/ is independently installable and carries
 the same human-facing policy for Agent Skills-compatible hosts.
 ```
-
-## Two installation paths
-
-`npx skills add` is a third-party cross-Agent installer for portable Skills. For this repository it copies only `skills/human-decision-language/` into the selected Agent's Skill location:
-
-```bash
-npx skills add cacohe/agent-language-policy --skill human-decision-language
-```
-
-The project CLI manages persistent instructions, configuration, status, validation, and removal. After a future npm publication it can be run as `npx agent-language-policy`; until then, run `bin/agent-language-policy.mjs` from a trusted checkout.
-
-Installing one path does not silently install the other. Users who want both portable discovery and persistent coverage must install both components.
-
-## Repository map
-
-| Path | Responsibility |
-| --- | --- |
-| `skills/` | Portable Agent Skills and their self-contained references |
-| `policy/` | Canonical language data shipped with the CLI |
-| `src/cli/` | Command parsing and orchestration |
-| `src/configuration/` | Configuration resolution, profile loading, policy rendering |
-| `src/installation/` | Agent adapters and safe managed-block lifecycle |
-| `src/validation/` | Markdown prose extraction and language validation |
-| `bin/` | Executable entry point |
-| `scripts/` | Static and package-release verification |
-| `test/` | Unit, integration, structure, and package tests |
-| `.github/workflows/` | Cross-platform continuous integration |
-
-Host-specific manifests remain at their required conventional locations: `plugin.json`, `.codex-plugin/`, `.claude-plugin/`, and `gemini-extension.json`.
