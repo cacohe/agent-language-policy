@@ -21,7 +21,7 @@ npm 包尚未发布，市场（marketplace）版本也尚未发布。正式发�
 npx skills add cacohe/agent-language-policy --skill human-decision-language
 ```
 
-该命令只安装 portable Skill，不安装常驻指令，不创建配置，也不提供 Markdown 校验器。如需这些能力，请另行安装策略 CLI。两条安装路径的区别见[架构说明](docs/architecture.md)。
+该命令只安装 portable Skill，不安装常驻指令，不创建配置，也不提供 Markdown 校验器。如需这些能力，请按照下文说明从源码单独安装策略 CLI。
 
 ## 策略边界
 
@@ -44,7 +44,20 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agen
 
 可将 `codex` 替换为 `claude-code`、`cursor`、`gemini-cli` 或 `github-copilot`；目标语言可改为 `zh-TW` 或 `ko-KR`。Cursor 用户级规则需按 CLI 输出手动设置。
 
-可移植 Skill 位于 `skills/human-decision-language/`。可将该目录复制到兼容 Agent Skills 的可信 Skill 目录，或使用 Agent 提供的仓库安装能力。为覆盖每次开发任务，仍建议同时安装常驻指令。
+## 仓库目录
+
+| 路径 | 职责 |
+| --- | --- |
+| `skills/` | 可移植 Agent Skills 及其自包含参考资料 |
+| `policy/` | CLI 使用的规范语言数据 |
+| `src/cli/` | 命令解析与编排 |
+| `src/configuration/` | 配置解析、语言配置加载和策略生成 |
+| `src/installation/` | Agent 适配器和托管区块生命周期 |
+| `src/validation/` | Markdown 正文提取和语言校验 |
+| `bin/` | 可执行入口 |
+| `scripts/` | 静态校验和软件包发布校验 |
+| `test/` | 单元测试、集成测试、结构测试和软件包测试 |
+| `.github/workflows/` | 跨平台持续集成 |
 
 ## 查看、校验和卸载
 
@@ -57,7 +70,7 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs uninstall --ag
 
 卸载只删除工具管理的区块。安装器修改已有文件前会创建备份，且 Skill 不预授权工具或 shell 权限。五种 Agent 的文件映射均有自动化测试，但尚未通过公开市场上架验证。
 
-设计、项目政策和历史见[架构说明](docs/architecture.md)、[SECURITY.md](SECURITY.md) 和 [CHANGELOG.md](CHANGELOG.md)。普通问题请提交到 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)，安全漏洞请按 `SECURITY.md` 中的私密流程报告。
+设计、项目政策和历史见[架构说明](docs/architecture.zh-CN.md)、[SECURITY.md](SECURITY.md) 和 [CHANGELOG.md](CHANGELOG.md)。普通问题请提交到 [GitHub Issues](https://github.com/cacohe/agent-language-policy/issues)，安全漏洞请按 `SECURITY.md` 中的私密流程报告。
 
 ## 开发
 

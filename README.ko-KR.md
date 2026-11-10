@@ -21,7 +21,7 @@ npm 패키지는 아직 게시되지 않았습니다. 마켓플레이스 패키�
 npx skills add cacohe/agent-language-policy --skill human-decision-language
 ```
 
-이 명령은 portable Skill만 설치합니다. 영구 지침을 설치하거나 설정을 만들거나 Markdown 검증기를 제공하지 않습니다. 이러한 기능이 필요하면 정책 CLI를 별도로 설치하세요. 두 설치 경로의 차이는 [Architecture](docs/architecture.md)를 참조하세요.
+이 명령은 portable Skill만 설치합니다. 영구 지침을 설치하거나 설정을 만들거나 Markdown 검증기를 제공하지 않습니다. 이러한 기능이 필요하면 아래 설명에 따라 소스에서 정책 CLI를 별도로 설치하세요.
 
 ## 정책 범위
 
@@ -44,7 +44,20 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agen
 
 `codex` 대신 `claude-code`, `cursor`, `gemini-cli`, `github-copilot`을 사용할 수 있고 언어는 `zh-CN` 또는 `zh-TW`로 바꿀 수 있습니다. Cursor 사용자 규칙은 CLI가 안내하는 수동 설정이 필요합니다.
 
-이식 가능한 Skill은 `skills/human-decision-language/`에 있습니다. Agent Skills 호환 호스트의 신뢰할 수 있는 Skill 디렉터리에 복사하거나 호스트의 저장소 설치 기능을 사용하세요. 모든 개발 작업에 적용하려면 영구 지침도 함께 설치하는 것이 좋습니다.
+## 저장소 디렉터리
+
+| 경로 | 책임 |
+| --- | --- |
+| `skills/` | 이식 가능한 Agent Skills 및 자체 포함 참조 자료 |
+| `policy/` | CLI가 사용하는 표준 언어 데이터 |
+| `src/cli/` | 명령 구문 분석 및 오케스트레이션 |
+| `src/configuration/` | 설정 해석, 언어 프로필 로딩 및 정책 렌더링 |
+| `src/installation/` | Agent 어댑터 및 관리 블록 수명 주기 |
+| `src/validation/` | Markdown 설명문 추출 및 언어 검증 |
+| `bin/` | 실행 진입점 |
+| `scripts/` | 정적 검증 및 패키지 릴리스 검증 |
+| `test/` | 단위, 통합, 구조 및 패키지 테스트 |
+| `.github/workflows/` | 크로스 플랫폼 지속적 통합 |
 
 ## 상태, 검증 및 제거
 

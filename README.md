@@ -21,7 +21,7 @@ With repository access, the community `skills` CLI can install `human-decision-l
 npx skills add cacohe/agent-language-policy --skill human-decision-language
 ```
 
-This command installs only the portable Skill. It does not install persistent instructions, create configuration, or provide the Markdown validator. Install the policy CLI separately when you need those capabilities. See [Architecture](docs/architecture.md) for how the two installation paths differ.
+This command installs only the portable Skill. It does not install persistent instructions, create configuration, or provide the Markdown validator. Install the policy CLI separately from source as described below when you need those capabilities.
 
 ## Policy boundaries
 
@@ -51,7 +51,20 @@ node /path/to/agent-language-policy/bin/agent-language-policy.mjs install --agen
 
 Replace `codex` with `claude-code`, `cursor`, `gemini-cli`, or `github-copilot`. Replace `zh-CN` with `zh-TW` or `ko-KR` as needed. Cursor user-level rules require the manual step printed by the CLI.
 
-The portable Skill is in `skills/human-decision-language/`. Copy that directory into an Agent Skills-compatible host's trusted skills directory, or install the repository when the host supports repository-based Skill installation. Persistent instructions remain the recommended coverage mechanism for every development task.
+## Repository layout
+
+| Path | Responsibility |
+| --- | --- |
+| `skills/` | Portable Agent Skills and self-contained references |
+| `policy/` | Canonical language data used by the CLI |
+| `src/cli/` | Command parsing and orchestration |
+| `src/configuration/` | Configuration, profile loading, and policy rendering |
+| `src/installation/` | Agent adapters and managed-block lifecycle |
+| `src/validation/` | Markdown prose extraction and language validation |
+| `bin/` | Executable entry point |
+| `scripts/` | Static and package-release verification |
+| `test/` | Unit, integration, structure, and package tests |
+| `.github/workflows/` | Cross-platform continuous integration |
 
 ## Operate and remove
 
